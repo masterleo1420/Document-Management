@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>TSM EN: Login</title>
+    <meta name="description" content="Admin, Dashboard, Bootstrap, Bootstrap 4, Angular, AngularJS" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- for ios 7 style, multi-resolution icon of 152x152 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent" />
+    <link rel="apple-touch-icon" href="/images/Logo-Noname.png" />
+    <meta name="apple-mobile-web-app-title" content="Flatkit" />
+    <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="shortcut icon" sizes="196x196" href="/images/Logo-Noname.png" />
+
+    <!-- style -->
+    <link rel="stylesheet" href="/animate.css/animate.min.css" type="text/css" />
+    <link rel="stylesheet" href="/glyphicons/glyphicons.css" type="text/css" />
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="/material-design-icons/material-design-icons.css" type="text/css" />
+
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+    <!-- build:css /styles/app.min.css -->
+    <link rel="stylesheet" href="/styles/app.css" type="text/css" />
+    <!-- endbuild -->
+    <link rel="stylesheet" href="/styles/font.css" type="text/css" />
+  </head>
+  <style>
+    .md-input {
+      background-color: #fff;
+    }
+
+    .md-input::placeholder {
+      opacity: 0.7;
+    }
+
+    .md-input:focus::placeholder {
+    color: #fff
+    }
+  </style>
+
+  <body>
+    <div class="app" id="app">
+      <div class="center-block w-xxl w-auto-xs p-y-md">
+        <div class="navbar">
+        </div>
+        <div class="p-a-md box-color r box-shadow-z1 text-color m-a">
+          <form name="form" method="POST" action="/user/login">
+            <div class="md-form-group float-label">
+              <input type="text" class="md-input" name="Username" placeholder="Username" />
+              <label>Username</label>
+            </div>
+            <div class="md-form-group float-label">
+              <input type="password" class="md-input" name="Password" placeholder="Password"/>
+              <label>Password</label>
+            </div>
+            <button type="submit" class="btn primary btn-block p-x-md w-100">Log In</button>
+          </form>
+        </div>
+
+        <div class="p-v-lg text-center">
+        </div>
+      </div>
+
+      <!-- ############ LAYOUT END-->
+    </div>
+    <!-- build:js scripts/app.html.js -->
+    <!-- jQuery -->
+    <script src="/jquery/jquery/dist/jquery.js"></script>
+    <!-- Bootstrap -->
+    <script src="/jquery/tether/dist/js/tether.min.js"></script>
+    <script src="/jquery/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- core -->
+    <script src="/jquery/underscore/underscore-min.js"></script>
+    <script src="/jquery/jQuery-Storage-API/jquery.storageapi.min.js"></script>
+    <script src="/jquery/PACE/pace.min.js"></script>
+
+    <!-- endbuild -->
+  </body>
+</html>

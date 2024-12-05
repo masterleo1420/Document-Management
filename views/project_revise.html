@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>TS Molymer: Project Revise</title>
+    <meta name="description" content="Admin, Dashboard, Bootstrap, Bootstrap 4, Angular, AngularJS" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- for ios 7 style, multi-resolution icon of 152x152 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent" />
+    <link rel="apple-touch-icon" href="/images/Logo-Noname.png" />
+    <meta name="apple-mobile-web-app-title" content="Flatkit" />
+    <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="shortcut icon" sizes="196x196" href="/images/Logo-Noname.png" />
+
+    <!-- style -->
+    <link rel="stylesheet" href="/animate.css/animate.min.css" type="text/css" />
+    <link rel="stylesheet" href="/glyphicons/glyphicons.css" type="text/css" />
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="/material-design-icons/material-design-icons.css" type="text/css" />
+
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+    <!-- build:css /styles/app.min.css -->
+    <link rel="stylesheet" href="/styles/app.css" type="text/css" />
+    <!-- endbuild -->
+    <link rel="stylesheet" href="/styles/font.css" type="text/css" />
+    <!-- datatables -->
+    <link rel="stylesheet" href="/styles/datatables.min.css" type="text/css" />
+    <!-- datatables libs print button -->
+    <link rel="stylesheet" href="/jquery/datatables/css/buttons.dataTables.css" />
+    <link rel="stylesheet" href="/jquery/datatables/css/dataTables.dataTables.css" />
+    <!-- select2 -->
+    <link rel="stylesheet" href="/jquery/select2/dist/css/select2.min.css" />
+    <link rel="stylesheet" href="/jquery/select2-bootstrap-theme/dist/select2-bootstrap.min.css" />
+    <link rel="stylesheet" href="/jquery/select2-bootstrap-theme/dist/select2-bootstrap.4.css" />
+
+    <link rel="stylesheet" href="/styles/datatables.style.css" />
+  </head>
+  <body>
+    <div class="app" id="app">
+      <!-- ############ LAYOUT START-->
+
+      <!-- aside -->
+      <div id="aside" class="app-aside modal fade nav-expand">
+        <div class="left navside black dk" layout="column">
+          <div class="navbar no-radius">
+            <!-- brand -->
+            <a class="navbar-brand" href="/">
+              <!-- <div ui-include="'../images/logo.svg'"></div> -->
+              <img src="/images/Logo-Noname.png" alt="." class="" />
+              <span class="hidden-folded inline" style="font-size: 1.1rem">TS MOLYMER</span>
+            </a>
+            <!-- / brand -->
+          </div>
+          <div class="nav-fold">
+            
+              <span class="clear hidden-folded p-x">
+                <span class="block _500 show-user-name" id="userName"></span>
+                <small class="block text-muted" id="departmentName"></small>
+                <small class="block text-muted" id="userPosition"></small>
+              </span>
+            
+          </div>
+          <div flex class="hide-scroll">
+            <nav class="scroll nav-stacked nav-active-primary">
+              <ul class="nav" ui-nav>
+                <!-- <li class="nav-header hidden-folded">
+                  <small class="text-muted">Master</small>
+                </li> -->
+
+                <li class="active">
+                  <a href="/">
+                    <!-- <span class="nav-icon">
+                      <i class="material-icons">&#xe3fc; </i>
+                    </span> -->
+                    <span class="nav-label">
+                      <b class="label label-sm danger" id="countPJissue"></b>
+                    </span>
+                    <span class="nav-text">Project</span>
+                  </a>
+                </li>
+                <li class="">
+                  <a href="/ppc">
+                    <!-- <span class="nav-icon">
+                      <i class="material-icons">&#xe8d2; </i>
+                    </span> -->
+                    <span class="nav-label">
+                      <b class="label label-sm danger" id="countPPCissue"></b>
+                    </span>
+                    <span class="nav-text">PPC</span>
+                  </a>
+                </li>
+                <li class="">
+                  <a href="/ecn">
+                    <!-- <span class="nav-icon">
+                      <i class="material-icons">&#xe8d2; </i>
+                    </span> -->
+                    <span class="nav-label">
+                      <b class="label label-sm danger" id="countECNissue"></b>
+                    </span>
+                    <span class="nav-text">ECN</span>
+                  </a>
+                </li>
+                <li class="">
+                  <a href="/mstDefault">
+                    <!-- <span class="nav-icon">
+                      <i class="material-icons">&#xe8d2; </i>
+                    </span> -->
+                    <!-- <span class="nav-label">
+                      <b class="label label-sm danger" id="countECNissue">1</b>
+                    </span> -->
+                    <span class="nav-text">Master Default</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <nav ui-nav>
+            <ul class="nav">
+              <li><div class="b-b b m-t-sm"></div></li>
+              <li class="no-bg">
+                <a href="/user/logout" class="button">
+                  <span class="nav-icon">
+                    <i class="material-icons">&#xe8ac;</i>
+                  </span>
+                  <span class="nav-text">Logout</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <!-- / aside -->
+
+      <!-- content -->
+      <div id="content" class="app-content box-shadow-z1" role="main">
+        <div class="navbar navbar-toggleable-sm flex-row align-items-center hidden-lg-up">
+          <a data-toggle="collapse" data-target="#navbar-1" class="navbar-item mr-3 hidden-md-up">
+            <i class="material-icons">&#xe5d2;</i>
+          </a>
+          <!-- brand -->
+          <a class="navbar-brand" href="/">
+            <!-- <div ui-include="'../images/logo.svg'"></div> -->
+            <img src="/images/Logo-Noname.png" alt="." class="" />
+            <span class="hidden-folded inline" style="font-size: 1.1rem">TS MOLYMER</span>
+          </a>
+          <!-- / brand -->
+          <!-- navbar collapse -->
+          <div class="collapse navbar-collapse" id="navbar-1">
+            <!-- link and dropdown -->
+            <ul class="nav navbar-nav text-{{app.setting.theme.primary}}-hover">
+              <li class="nav-item">
+                <a class="nav-link" href="/">
+                  <span class="nav-text">Project</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/ppc">
+                  <span class="nav-text">PPC</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/ecn">
+                  <span class="nav-text">ECN</span>
+                </a>
+              </li>
+
+              <li class="nav-item nav-mst-default">
+                <a class="nav-link" href="/mstDefault">
+                  <span class="nav-text">Master Default</span>
+                </a>
+              </li>
+            </ul>
+            <!-- / link and dropdown -->
+          </div>
+          <!-- / navbar collapse -->
+
+          <!-- nabar right -->
+          <ul class="nav navbar-nav flex-row align-items-center ml-auto">
+            <li class="nav-item dropdown">
+              <span class="text-nowrap show-user-name"></span>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/user/logout">
+                <span class="hidden-xs-down btn btn-sm rounded btn-outline b-danger text-u-c _600"> Logout </span>
+                <span class="hidden-sm-up">
+                  <i class="material-icons">&#xe8ac;</i>
+                </span>
+              </a>
+            </li>
+          </ul>
+          <!-- / navbar right -->
+        </div>
+
+        <div ui-view class="app-body padding" id="view">
+          <div class="row">
+            <div class="col-12">
+              <div class="box">
+                <div class="box-header d-flex align-items-center justify-content-between">
+                  <h2 class="">Aissign Part</h2>
+                  <div class="form-group row m-0">
+                    <div class="col p-0">
+                      <button type="button" class="btn btn-fw blue-600" id="btnPJReviseAdd">
+                        <i class="fa fa-plus"></i><span class="hidden-xs-down ml-2">Add</span>
+                      </button>
+                    
+                    </div>
+                  </div>
+                </div>
+                <div class="box-divider m-0"></div>
+                <div class="box-body">
+                  <div class="form-inline">
+                    <div class="form-group">
+                      <div class="input-group mb-1">
+                        <div class="input-group-addon border-0">Customer</div>
+                        <input type="text" class="form-control" id="inputCustomer" disabled />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="input-group mb-1">
+                        <div class="input-group-addon border-0">Model</div>
+                        <input type="text" class="form-control" id="inputModel" disabled />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="input-group mb-1">
+                        <div class="input-group-addon border-0">Ref Code</div>
+                        <input type="text" class="form-control" id="inputRefCode" disabled />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="table-responsive text-nowrap">
+                    <table id="tablePJrevise" class="export-table text-center table-bordered b-t b-b table m-0 w-100">
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th style="max-width: 100px">
+                            Part<br class="hidden-lg-up" />
+                            Status
+                          </th>
+                          <th>
+                            Part<br class="hidden-lg-up" />
+                            Code
+                          </th>
+                          <th>
+                            Part<br class="hidden-lg-up" />
+                            Name
+                          </th>
+                          <th>
+                            Drawing<br class="hidden-lg-up" />
+                            Rev.
+                          </th>
+  
+                          <th>
+                            Revise<br class="hidden-lg-up" />
+                            Date
+                          </th>
+                          <th>
+                            Receive<br class="hidden-lg-up" />
+                            Date
+                          </th>
+                          <th>
+                            Doc<br class="hidden-lg-up" />
+                            Name
+                          </th>
+                          <th>
+                            Doc<br class="hidden-lg-up" />
+                            File
+                          </th>
+                          <th>
+                            Revise<br class="hidden-lg-up" />
+                            No.
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <!-- <tr>
+                          <td>1</td>
+                          <td><span class="label grey-600 w-75">Issue</span></td>
+                          <td>TG116660-9780,TG116660-9781</td>
+                          <td>Door Sub Assy</td>
+                          <td>0</td>
+                          <td>26 May 2024</td>
+                          <td>26 May 2024</td>
+                          <td>3D Dwg</td>
+                          <td>240123se.pdf</td>
+                          <td>Change Dwg</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td><span class="label warn w-75">Checked</span></td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td><span class="label green w-75">Completed</span></td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                        </tr>
+                        <tr>
+                          <td>5</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                        </tr>
+                        <tr>
+                          <td>6</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                        </tr>
+                        <tr>
+                          <td>7</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                        </tr> -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="col-12 d-none" id="modalPJRevisemanagement">
+              <div class="box">
+                <div class="box-header">
+                  <h2>Revise Part</h2>
+                </div>
+                <div class="box-divider m-0"></div>
+                <div class="box-body">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="form-group row text-right">
+                        <div class="">
+                          <button type="button" class="btn btn-fw blue-600 " id="btnReviseHistory">
+                            <i class="fa fa-history"></i><span class="hidden-xs-down ml-2">Revise History</span>
+                          </button>
+
+                          <!-- <button type="submit" class="btn btn-fw primary" id="btnReviseSave">
+                            <i class="fa fa-save"></i><span class="hidden-xs-down ml-2">Save</span>
+                          </button> -->
+                        </div>
+                        <div class="col d-flex justify-content-end" >
+                        <div >
+                          <button type="button" class="btn d-none warn" id="btnPJReviseCalcel">
+                            <i class="fa fa-times"></i><span class="hidden-xs-down ml-2">Cancel</span>
+                          </button>
+                        </div>
+                        <div class="mx-2" id="btnEditAndSave"></div>
+                        <div >
+                          <!-- <button type="button" class="btn btn-fw dark " id="btnPJReviseDoc">
+                            <i class="fa fa-file-pdf-o"></i><span class="hidden-xs-down ml-2">View Doc.</span>
+                          </button> -->
+
+                          <!-- <button type="button" class="btn btn-fw info show-edit" id="btnPJReviseEdit">
+                            <i class="fa fa-edit"></i><span class="hidden-xs-down ml-2">Edit</span>
+                          </button> -->
+                          <button type="button" class="btn btn-fw danger" id="btnPJReviseDel">
+                            <i class="fa fa-trash-o"></i><span class="hidden-xs-down ml-2">Delete</span>
+                          </button>
+
+                        </div>
+                      </div>
+                        
+                      </div>
+
+                    </div>
+                    <div class="col">
+                      <form role="form" ui-jp="parsley" novalidate>
+                        <div class="form-group row">
+                          <label for="inputPartcode" class="col-sm-2 form-control-label">Part code</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control dis_input" id="inputPartcode" placeholder="Part code" autocomplete="off" required />
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputPartname" class="col-sm-2 form-control-label">Part name</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control dis_input" id="inputPartname" placeholder="Part name" autocomplete="off" required />
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputRecDate" class="col-sm-2 form-control-label">Receive Date</label>
+                          <div class="col-sm-10">
+                            <input type="date" class="form-control dis_input" id="inputRecDate" placeholder="Receive Date" autocomplete="off" required />
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="txtareaDrawingRev" class="col-sm-2 form-control-label">Drawing Rev.</label>
+                          <div class="col-sm-10">
+                            <textarea class="form-control dis_input" placeholder="Drawing Rev." id="txtareaDrawingRev"></textarea>
+                          </div>
+                        </div>
+                        
+
+                        <input type="file" id="fileUpload" class="d-none" name="fileUpload" accept=".pdf"/>
+                      </form>
+                    </div>
+
+                    <div class="col-12 col-xl-5">
+                      <div class="form-group row">
+                        <label for="showIssue" class="col-sm-3 form-control-label">Issued by</label>
+                        <div class="col-sm-9 input-group">
+                          <!-- <span type="text" class="form-control text-center" id="showIssue" value="" autocomplete="off" readonly >test test 12 May 2019</span> -->
+                          <input
+                            type="text"
+                            class="form-control text-center"
+                            id="showIssue"
+                            value="test test 12 May 2019"
+                            autocomplete="off"
+                            readonly
+                          />
+                          <div class="input-group-btn">
+                            <button
+                              class="btn btn-default black btn-swal-sign"
+                              type="button"
+                              swal-title="ISSUED BY"
+                              swal-target="showIssue"
+                              id="btnSignIssue"
+                              checkSign="/part/sign/issue"
+                            >
+                              sign
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- todo แสดงหลังจาก Sign Issue -->
+                      <div class="form-group row d-none show-edit">
+                        <label for="showCheck" class="col-sm-3 form-control-label">Checked by</label>
+                        <div class="col-sm-9 input-group">
+                          <input type="text" class="form-control text-center" id="showCheck" placeholder="" autocomplete="off" readonly />
+                          <div class="input-group-btn">
+                            <button
+                              class="btn btn-default black btn-swal-sign"
+                              type="button"
+                              swal-title="CHECKED BY"
+                              swal-target="showCheck"
+                              id="btnSignCheck"
+                              checkSign="/part/sign/check"
+                            >
+                              sign
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- todo -->
+
+                      <!-- todo แสดงหลังจาก Sign Check -->
+                      <div class="form-group row d-none show-edit">
+                        <label for="showApprove" class="col-sm-3 form-control-label">Approved by</label>
+                        <div class="col-sm-9 input-group">
+                          <input type="text" class="form-control text-center" id="showApprove" placeholder="" autocomplete="off" readonly />
+                          <div class="input-group-btn">
+                            <button
+                              class="btn btn-default black btn-swal-sign"
+                              type="button"
+                              swal-title="APPROVED BY"
+                              swal-target="showApprove"
+                              id="btnSignApprove"
+                              checkSign="/part/sign/approve"
+                            >
+                              sign
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                       <!-- todo -->
+
+                      <!-- todo  Upload File -->
+                      <div class="form-group row" id="tooltipNameFile" data-toggle="tooltip" data-placement="top" title="Upload Doc.">
+                        <!-- <label for="showIssue" class="col-sm-3 form-control-label"></label> -->
+                        <div class="col input-group" >
+                          <!-- <input type="text" class="col form-control-label text-center" id="fileName" placeholder="" autocomplete="off" required disabled/> -->
+                          <button type="button" class=" btn btn-fw white d-inline-block col text-truncate" style="overflow: hidden;"  id="btnUpload" >
+                            <i class="fa fa-upload"></i><span class="hidden-xs-down ml-2 "  id="nameFile">Upload Doc.</span>
+                          </button>
+     
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <!-- <label for="showIssue" class="col-sm-3 form-control-label"></label> -->
+                        <div class="col input-group">
+                          <!-- <input type="text" class="col form-control-label text-center" id="fileName" placeholder="" autocomplete="off" required disabled/> -->
+                          <button type="button" class="btn btn-fw dark col " id="btnPJReviseDoc">
+                            <i class="fa fa-file-pdf-o"></i><span class="hidden-xs-down ml-2">View Doc.</span>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <div class="col ">
+                          <div>
+                            <button type="button" class="btn btn-fw dark col d-none" id="btnPJReviseStamping">
+                              <i class="fa fa-check"></i><span class="hidden-xs-down ml-2">Stamping</span>
+                            </button>
+
+                          </div>
+                        </div>
+                      </div>
+                      <!-- todo -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / content -->
+    </div>
+  </body>
+  <!-- build:js scripts/app.html.js -->
+  <!-- jQuery -->
+  <script src="/jquery/jquery/dist/jquery.js"></script>
+  <!-- Bootstrap -->
+  <script src="/jquery/tether/dist/js/tether.min.js"></script>
+  <script src="/jquery/bootstrap/dist/js/bootstrap.js"></script>
+  <!-- print -->
+  <script src="/pdf-lib/download.js"></script>
+  <script src="/pdf-lib/pdf-lib.min.js"></script>
+  <script src="/jquery/html2pdf/html2pdf.bundle.min.js"></script>
+  <script src="/js/print.js"></script>
+  <!-- core -->
+  <script src="/jquery/underscore/underscore-min.js"></script>
+  <script src="/jquery/jQuery-Storage-API/jquery.storageapi.min.js"></script>
+  <script src="/jquery/PACE/pace.min.js"></script>
+  <!-- pdf -->
+
+  <!-- datatables -->
+  <script src="/jquery/datatables/media/js/jquery.dataTables.min.js"></script>
+  <!-- <script src="/js/testdatatable.js"></script> -->
+
+  <!-- datatables libs print button -->
+  <script src="/jquery/datatables/js/dataTables.js"></script>
+  <script src="/jquery/datatables/js/dataTables.buttons.js"></script>
+  <script src="/jquery/datatables/js/buttons.dataTables.js"></script>
+  <script src="/jquery/datatables/js/jszip.min.js"></script>
+  <script src="/jquery/datatables/js/pdfmake.min.js"></script>
+  <script src="/jquery/datatables/js/vfs_fonts.js"></script>
+  <script src="/jquery/datatables/js/buttons.html5.min.js"></script>
+  <script src="/jquery/datatables/js/buttons.print.min.js"></script>
+
+  <!-- select2 -->
+  <script src="/jquery/select2/dist/js/select2.min.js"></script>
+  <!-- <script src="/js/testSelect2.js"></script> -->
+
+  <!-- sweetalert2 -->
+  <script src="/jquery/swalalert2/swalalert2.js"></script>
+
+  <!-- <script src="/js/testSwalalert2.js"></script> -->
+  <!-- scripts -->
+
+  <script src="/scripts_page/function.js"></script>
+  <script src="/scripts_page/Project/projectRevise.js"></script>
+
+
+</html>

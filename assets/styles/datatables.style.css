@@ -1,0 +1,108 @@
+/* rgba(136,255,219,0.1) */
+/* another */
+/* width */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.box,
+.card {
+  background-color: rgba(136, 255, 219, 0.1);
+}
+
+.box-header,
+.modal-header {
+  color: #fff;
+  background-color: rgb(39, 184, 155);
+}
+.accordion .card {
+  margin-bottom: 1.5rem;
+}
+.accordion .btn-block {
+  background-color: transparent;
+  padding: 0;
+}
+/* pdf */
+
+#pdfViewer {
+  height: 1150px;
+  width: 800px;
+  background: rgb(102, 110, 105);
+  position: relative;
+}
+
+#pdfStamp {
+  position: absolute;
+  /* height: 160px; */
+  width: 400px;
+
+  right: 15px;
+  bottom: 10px;
+  background-color: rgba(188, 178, 178, 0.575);
+}
+
+#pdfStamp table thead tr {
+  background: transparent;
+}
+#pdfStamp table thead tr th {
+  border: 1px solid #111;
+  text-align: center;
+}
+#pdfStamp table tbody tr td {
+  border: 1px solid #111;
+}
+/* table */
+
+table {
+  background-color: #ffffffb3;
+}
+
+table thead tr {
+  background-color: rgb(184, 235, 240);
+  /* color: #fff; */
+}
+table .label {
+  padding: 0.75em 0.5em;
+  font-size: 100%;
+}
+
+.card-new {
+  background-color: #fffffffb;
+  padding: 20px;
+  border-radius: 7px;
+  height: 100%;
+}
+
+/* .dt-button.buttons-csv.buttons-html5 {
+  font-weight: 500;
+  outline: 0 !important;
+  min-width: 4rem;
+  color: rgba(255, 255, 255, 0.87) !important;
+  background-color: #2e3e4e !important;
+} */
+
+/* swal alert */
+
+.swal2-popup.swal2-toast.swal2-show h2 {
+  text-align: center;
+}

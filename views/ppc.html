@@ -1,0 +1,1743 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>TS Molymer: PPC List</title>
+    <meta name="description" content="Admin, Dashboard, Bootstrap, Bootstrap 4, Angular, AngularJS" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- for ios 7 style, multi-resolution icon of 152x152 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent" />
+    <link rel="apple-touch-icon" href="/images/Logo-Noname.png" />
+    <meta name="apple-mobile-web-app-title" content="Flatkit" />
+    <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="shortcut icon" sizes="196x196" href="/images/Logo-Noname.png" />
+
+    <!-- style -->
+    <link rel="stylesheet" href="/animate.css/animate.min.css" type="text/css" />
+    <link rel="stylesheet" href="/glyphicons/glyphicons.css" type="text/css" />
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="/material-design-icons/material-design-icons.css" type="text/css" />
+
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+    <!-- build:css /styles/app.min.css -->
+    <link rel="stylesheet" href="/styles/app.css" type="text/css" />
+    <!-- endbuild -->
+    <link rel="stylesheet" href="/styles/font.css" type="text/css" />
+    <!-- datatables -->
+    <link rel="stylesheet" href="/styles/datatables.min.css" type="text/css" />
+    <!-- datatables libs print button -->
+    <link rel="stylesheet" href="/jquery/datatables/css/buttons.dataTables.css">
+    <link rel="stylesheet" href="/jquery/datatables/css/dataTables.dataTables.css">
+    <!-- select2 -->
+    <link rel="stylesheet" href="/jquery/select2/dist/css/select2.min.css" />
+    <link rel="stylesheet" href="/jquery/select2-bootstrap-theme/dist/select2-bootstrap.min.css" />
+    <link rel="stylesheet" href="/jquery/select2-bootstrap-theme/dist/select2-bootstrap.4.css" />
+
+    <link rel="stylesheet" href="/styles/datatables.style.css" />
+  </head>
+  <body>
+    <div class="app" id="app">
+
+      
+      <div class="modal fade" role="dialog" tabindex="-1" id="modalDeleteConfirm">
+        <div class="modal-dialog modal-dialog-centered d-flex justify-content-center"  role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Confirm Delete</h4><button class="close" type="button" aria-label="Close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p>Are you sure to delete?</p>
+                </div>
+                <div class="modal-footer"><button class="btn btn-secondary" type="button" data-dismiss="modal">No</button>
+                    <button class="btn btn-danger" id="btnConfirmDelete" type="button">Yes</button></div>
+            </div>
+        </div>
+    </div>
+      <!-- ############ LAYOUT START-->
+      <!-- aside -->
+      <div id="aside" class="app-aside modal fade nav-expand">
+        <div class="left navside black dk" layout="column">
+          <div class="navbar no-radius">
+            <!-- brand -->
+            <a class="navbar-brand" href="/">
+              <!-- <div ui-include="'../images/logo.svg'"></div> -->
+              <img src="/images/Logo-Noname.png" alt="." class="" />
+              <span class="hidden-folded inline" style="font-size: 1.1rem">TS MOLYMER</span>
+            </a>
+            <!-- / brand -->
+          </div>
+          <div class="nav-fold">
+            
+              <span class="clear hidden-folded p-x">
+                <span class="block _500 show-user-name"></span>
+                <small class="block text-muted" id="departmentName"></small>
+                <small class="block text-muted" id="userPosition"></small>
+              </span>
+            
+          </div>
+          <div flex class="hide-scroll">
+            <nav class="scroll nav-stacked nav-active-primary">
+              <ul class="nav" ui-nav>
+
+                <!-- <li class="nav-header hidden-folded">
+                  <small class="text-muted">Master</small>
+                </li> -->
+
+                <li>
+                  <a href="/">
+                    <!-- <span class="nav-icon">
+                      <i class="material-icons">&#xe3fc; </i>
+                    </span> -->
+                    <span class="nav-label">
+                      <b class="label label-sm danger" id="countPJissue"></b>
+                    </span>
+                    <span class="nav-text">Project</span>
+                  </a>
+                </li>
+
+                <li class="active">
+                  <a id="toggle_show_customers" >
+                    <!-- <span class="nav-icon">
+                      <i class="material-icons">&#xe8d2; </i>
+                    </span> -->
+                    <span class="nav-label">
+                      <b class="label label-sm danger " id="countPPCissue"></b>
+                      <b class="label label-sm danger d-none" id="countPPCissueNoneShow"></b>
+
+                    </span>
+                    <span class="nav-text">PPC</span>
+                  </a>
+                </li>
+                <li class="">
+                  <a href="/ecn">
+                    <!-- <span class="nav-icon">
+                      <i class="material-icons">&#xe8d2; </i>
+                    </span> -->
+                    <span class="nav-label">
+                      <b class="label label-sm danger" id="countECNissue"></b>
+                    </span>
+                    <span class="nav-text">ECN</span>
+                  </a>
+                </li>
+                <li class="nav-mst-default">
+                  <a href="/mstDefault">
+                    <!-- <span class="nav-icon">
+                      <i class="material-icons">&#xe8d2; </i>
+                    </span> -->
+                    <!-- <span class="nav-label">
+                      <b class="label label-sm danger" id="countECNissue">1</b>
+                    </span> -->
+                    <span class="nav-text">Master Default</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <nav ui-nav>
+            <ul class="nav">
+              <li><div class="b-b b m-t-sm"></div></li>
+              <li class="no-bg">
+                <a href="/user/logout" class = "button">
+                  <span class="nav-icon">
+                    <i class="material-icons">&#xe8ac;</i>
+                  </span>
+                  <span class="nav-text">Logout</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <!-- / aside -->
+
+      <!-- content -->
+      <div id="content" class="app-content box-shadow-z1" role="main">
+        <div class="navbar navbar-toggleable-sm flex-row align-items-center hidden-lg-up">
+          <a data-toggle="collapse" data-target="#navbar-1" class="navbar-item mr-3 hidden-md-up">
+            <i class="material-icons">&#xe5d2;</i>
+          </a>
+          <!-- brand -->
+          <a class="navbar-brand" href="/">
+            <!-- <div ui-include="'../images/logo.svg'"></div> -->
+            <img src="/images/Logo-Noname.png" alt="." class="" />
+            <span class="hidden-folded inline" style="font-size: 1.1rem">TS MOLYMER</span>
+          </a>
+          <!-- / brand -->
+          <!-- navbar collapse -->
+          <div class="collapse navbar-collapse" id="navbar-1">
+            <!-- link and dropdown -->
+            <ul class="nav navbar-nav text-{{app.setting.theme.primary}}-hover">
+              <li class="nav-item">
+                <a class="nav-link" href="/">
+                  <span class="nav-text">Project</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/ppc">
+                  <span class="nav-text">PPC</span>
+                </a>
+
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/ecn">
+                  <span class="nav-text">ECN</span>
+                </a>
+              </li>
+
+              <li class="nav-item nav-mst-default">
+                <a class="nav-link" href="/mstDefault">
+                  <span class="nav-text">Master Default</span>
+                </a>
+              </li>
+            </ul>
+            <!-- / link and dropdown -->
+          </div>
+          <!-- / navbar collapse -->
+
+          <!-- nabar right -->
+          <ul class="nav navbar-nav flex-row align-items-center ml-auto">
+            <li class="nav-item dropdown">
+              <span class="text-nowrap show-user-name"></span>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/user/logout">
+                <span class="hidden-xs-down btn btn-sm rounded btn-outline b-danger text-u-c _600"> Logout </span>
+                <span class="hidden-sm-up">
+                  <i class="material-icons">&#xe8ac;</i>
+                </span>
+              </a>
+            </li>
+          </ul>
+          <!-- / navbar right -->
+        </div>
+        
+
+        <div ui-view class="app-body padding" id="view">
+          <div class="row">
+            <div class="col-12">
+              <div class="box">
+                <div class="box-header d-flex align-items-center justify-content-between">
+                  <h2 class="">PPC Request List</h2>
+                  <div class="form-group row m-0">
+                    <div class="col p-0">
+                      <button type="button" class="btn btn-fw dark" id="btnPPCissue">
+                        <i class="fa fa-plus"></i><span class="hidden-xs-down ml-2">Request</span>
+                      </button>
+                      <button type="button" class="btn btn-fw info d-none showEdit" id="btnPPCedit" >
+                        <i class="fa fa-edit"></i><span class="hidden-xs-down ml-2">Edit</span>
+                      </button>
+                      <button type="button" class="btn btn-fw danger d-none showEdit" id="btnPPCdel" >
+                        <i class="fa fa-trash-o"></i><span class="hidden-xs-down ml-2">Delete</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="box-divider m-0"></div>
+<div class="box-body">
+
+  <div class="table-responsive not-show-customer ">
+    <div class="row m-0 mt-3">
+      <div class="col"></div>
+      <div class="col">
+        <div class="form-group row">
+        <label class="form-control-label col-4" for="searchMonthNone">Search Month</label>
+        <input type="month" class="form-control form-control-sm col-8 month-input" id="searchMonthNone" placeholder="Select" value="YYYY-MM" autocomplete="off" required>
+        </div>
+      </div>
+      <div class="col"></div>
+  </div>
+    <table id="tableReqPPC" class="export-table text-center table-bordered b-t b-b table m-0 w-100">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th style="min-width: 170px">Status</th>
+          <th>Ref Code</th>
+          <th>Internal/External</th>
+          <th>Customer</th>
+          <th>Req. Department</th>
+          <th>Request By</th>
+          <th>Imprement Date</th>
+          <th>Part No</th>
+          <th>Part Name</th>
+          <th>Request Date</th>
+          <th>En Reply Date</th>
+          <th>Approve Plan Date</th>
+          <th>Complete Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- <tr>
+          <td>1</td>
+          <td><span class="label grey-700 w-75">Request</span></td>
+          <td>PPC-0001</td>
+          <td>Internal</td>
+          <td>Customer 1</td>
+          <td>PPC</td>
+          <td>Jack</td>
+          <td>26 May 2024</td>
+          <td>PPC-0001</td>
+          <td>PPC-0001</td>
+          <td>26 May 2024</td>
+          <td>26 May 2024</td>
+          <td>26 May 2024</td>
+          <td>26 May 2024</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><span class="label warn w-75">En Reply</span></td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><span class="label text-white blue-300 w-75">Wait Approve</span></td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><span class="label blue-700 w-75">Approved</span></td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><span class="label green w-75">Complete</span></td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><span class="label danger w-75">Reject</span></td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+        </tr> -->
+      </tbody>
+    </table>
+  </div>
+  <div class="table-responsive text-nowrap d-none show-customer">
+    <div class="row m-0 mt-3">
+      <div class="col"></div>
+      <div class="col">
+        <div class="form-group row">
+        <label class="form-control-label col-4" for="searchMonth">Search Month</label>
+        <input type="month" class="form-control form-control-sm col-8 month-input" id="searchMonth" placeholder="Select" value="YYYY-MM" autocomplete="off" required>
+        </div>
+      </div>
+      <div class="col"></div>
+  </div>
+    <table id="tableReqPPC_Customer" class="export-table text-center table-bordered b-t b-b table m-0 w-100">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th style="min-width: 170px">Status</th>
+          <th>Ref Code</th>
+          <th>Customer</th>
+          <th>Req. Department</th>
+          <th>Request By</th>
+          <th>Imprement Date</th>
+          <th>Part No</th>
+          <th>Part Name</th>
+          <th>Request Date</th>
+          <th>En Reply Date</th>
+          <th>Approve Plan Date</th>
+          <th>Complete Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- <tr>
+          <td>1</td>
+          <td><span class="label grey-700 w-75">Request</span></td>
+          <td>PPC-0001</td>
+          <td>Customer 1</td>
+          <td>PPC</td>
+          <td>Jack</td>
+          <td>26 May 2024</td>
+          <td>PPC-0001</td>
+          <td>PPC-0001</td>
+          <td>26 May 2024</td>
+          <td>26 May 2024</td>
+          <td>26 May 2024</td>
+          <td>26 May 2024</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><span class="label warn w-75">En Reply</span></td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><span class="label text-white blue-300 w-75">Wait Approve</span></td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><span class="label blue w-75">Approved</span></td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><span class="label green w-75">Complete</span></td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><span class="label danger w-75">Reject</span></td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+          <td>table cell</td>
+        </tr> -->
+      </tbody>
+    </table>
+  </div>
+</div>
+              </div>
+            </div>
+            <div class="col-12" id="accordionExample">
+              <div class="accordion"  >
+                <!--* status Request -->
+                <div class="card displayShow" id="headingReq">
+                  <div class="box-header" >
+                    <h2 class="mb-0">
+                      <button
+                        class="btn btn-block text-left"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#collapseReq"
+                        aria-expanded="true"
+                        aria-controls="collapseReq"
+                      >
+                        Request
+                      </button>
+                    </h2>
+                  </div>
+
+                  <div id="collapseReq" class="collapse " aria-labelledby="headingReq" data-parent="#accordionExample">
+                    <div class="box-body">
+                      <div class="row">
+                        <div class="col-12 m-b-md">
+                          <div class="input-group justify-content-end">
+                            <button class="btn btn-fw success disButton_complete" type="button" id="btnSave_Request">
+                              <i class="fa fa-save"></i><span class="ml-2 hidden-xs">Save</span>
+                            </button>
+                          </div>
+                        </div>
+                        
+                      </div>
+                      <div class="row">
+                        <div class="col-12 col-xl-4">
+                          <div class="form-group row">
+                            <label for="selectReqDepartment_Request" class="col-sm-3 form-control-label">Request Department</label>
+                            <div class="col-sm-9 input-group">
+                              <select id="selectReqDepartment_Request" class="form-control select2-single clean_selectRequest disSelect_complete" >
+                                <!-- <option>Section 1</option>
+                                <option>Section 2</option>
+                                <option>Section 3</option> -->
+                              </select></div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-xl-4">
+                          <div class="form-group row">
+                            <label for="selectCustomer_Request" class="col-sm-3 form-control-label">Customer</label>
+                            <div class="col-sm-9 input-group">
+                              <select id="selectCustomer_Request" class="form-control select2-single clean_selectRequest disSelect_complete">
+                                <!-- <option>Customer 1</option>
+                                <option>Customer 2</option>
+                                <option>Customer 3</option> -->
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-xl-4">
+                          <div class="form-group row">
+                            <label for="inputReqDate" class="col-sm-3 form-control-label">Request Date</label>
+                            <div class="col-sm-9 ">
+                              <input type="date" class="form-control clean_dateRequest disInput_complete" id="inputReqDate_Request" placeholder="" autocomplete="off" required />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 col-xl-4">
+                          <div class="form-group row">
+                            <label for="inputSubject" class="col-sm-3 form-control-label">Subject</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control clean_inputRequest disInput_complete" id="inputSubject_Request" placeholder="" autocomplete="off" required />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-xl-4">
+                          <div class="form-group row">
+                            <label for="inputPJtrial" class="col-sm-3 form-control-label">Project trial</label>
+                            <div class="col-sm-9">
+                              <div class="form-group m-0">
+                                <input type="date" class="form-control clean_dateRequest disInput_complete" id="inputPJtrial_Request" placeholder="" autocomplete="off" required />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-xl-4">
+                          <div class="form-group row">
+                            <label for="inputPtoI" class="col-sm-3 form-control-label">Plan to Imprement</label>
+                            <div class="col-sm-9">
+                              <div class="form-group m-0">
+                                <input type="date" class="form-control clean_dateRequest clean_inputRequest disInput_complete" id="inputPtoI_Request" placeholder="" autocomplete="off" required />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 col-xl-4">
+                          <div class="form-group row">
+                            <label for="selectModel_Request" class="col-sm-3 form-control-label">Model</label>
+                            <div class="col-sm-9 input-group">
+                              <select id="selectModel_Request" class="form-control select2-single clean_selectRequest disSelect_complete" title="กรุณาเลือก">
+                                <!-- <option>Model 1</option>
+                                <option>Model 2</option>
+                                <option>Model 3</option> -->
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-xl-4">
+                          <div class="form-group row">
+                            <label for="selectPartCode_Request" class="col-sm-3 form-control-label">Part Code</label>
+                            <div class="col-sm-9 input-group">
+                              <select id="selectPartCode_Request" class="form-control select2-single clean_selectRequest disSelect_complete">
+                                <!-- <option>Part Code 1</option>
+                                <option>Part Code 2</option>
+                                <option>Part Code 3</option> -->
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-xl-4">
+                          <div class="form-group row">
+                            <label for="inputPartName_Request" class="col-sm-3 form-control-label" >Part Name</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control clean_inputRequest " id="inputPartName_Request" placeholder="" autocomplete="off" required  disabled/>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="box-divider m-0"></div>
+
+                      <div class="row m-y-md">
+                        <div class="col-12 col-md-6">
+                          <div class="card-new">
+                            <h5 class="m-b-md">Change Item</h5>
+                            <div class="p-x" id="changeItemBody">
+                              <!-- <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 changeItem_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="1" />
+                                    <i class="green"></i>
+                                    Design
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 changeItem_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="2" />
+                                    <i class="green"></i>
+                                    Supplier / Sourcing
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 changeItem_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="3" />
+                                    <i class="green"></i>
+                                    Material
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 changeItem_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="4" />
+                                    <i class="green"></i>
+                                    Process / Method
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 changeItem_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="5" />
+                                    <i class="green"></i>
+                                    Machine
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 changeItem_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="6" />
+                                    <i class="green"></i>
+                                    Mold / Die
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 changeItem_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="7" />
+                                    <i class="green"></i>
+                                    Jig / Tooling
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 changeItem_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="8" />
+                                    <i class="green"></i>
+                                    Location
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 changeItem_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="9" />
+                                    <i class="green"></i>
+                                    New item
+                                  </label>
+                                </div>
+                              </div> -->
+                            </div>
+                          </div>
+
+                        </div>
+                        <div class="col-12 col-md-6">
+                          <div class="card-new">
+
+                            <h5 class="m-b-md">Reason</h5>
+                            <div class="p-x" id="ReasonBody">
+                              <!-- <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 reason_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="1" />
+                                    <i class="green"></i>
+                                    Quality Improvement
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 reason_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="2" />
+                                    <i class="green"></i>
+                                    Capacity Improvement
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 reason_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="3" />
+                                    <i class="green"></i>
+                                    Cost Reduction
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 reason_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="4" />
+                                    <i class="green"></i>
+                                    SoC / Environment
+                                  </label>
+                                </div>
+                              </div>
+
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 reason_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="5" />
+                                    <i class="green"></i>
+                                    New item
+                                  </label>
+                                </div>
+                              </div> -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="box-divider m-0"></div>
+
+                      <div class="row m-y-md">
+                        <div class="col-12 col-xl-6">
+                          <div class="form-group row">
+                            <label for="inputPrevProcess" class="col-sm-3 form-control-label">Previous Process</label>
+                            <div class="col-sm-9">
+                              <textarea class="form-control clean_textareaRequest disInput_complete" id="inputPrevProcess_Request" rows="2"></textarea>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-xl-6">
+                          <div class="form-group row">
+                            <label for="inputNewProcess" class="col-sm-3 form-control-label">New Process</label>
+                            <div class="col-sm-9">
+                              <textarea class="form-control clean_textareaRequest disInput_complete" id="inputNewProcess_Request" rows="2"></textarea>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="box-divider m-0"></div>
+                      <div class="row m-y-md">
+                        <div class="col-12 col-md-6">
+                          <h5 class="m-b-md">Effective Period</h5>
+
+                          <div class="p-x">
+                            <div class="input-group align-items-center m-b-sm">
+                              <div class="radio w-100">
+                                <label class="md-check m-0">
+                                  <input type="radio" name="EffPeriod" value="1" />
+                                  <i class="green"></i>
+                                  Long Term
+                                </label>
+                              </div>
+                            </div>
+                            <div class="input-group align-items-center m-b-sm">
+                              <div class="radio w-100">
+                                <label class="md-check m-0">
+                                  <input type="radio" name="EffPeriod" value="2" />
+                                  <i class="green"></i>
+                                  Period
+                                </label>
+                              </div>
+                              <input type="text" class="form-control w-100 clean_inputRequest " id="inputEffPeriod_Request" placeholder="" disabled/>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                          <div class="form-group row">
+                            <label for="showReq_Request" class="col-sm-3 form-control-label">Request by</label>
+                            <div class="col-sm-9 input-group">
+                              <input type="text" class="form-control text-center "  id="showReq_Request" placeholder="" autocomplete="off" readonly />
+                              <div class="input-group-btn">
+                                <button class="btn btn-default black btn-swal-sign disButton_complete" type="button" swal-title="REQUEST BY" swal-target="showReq_Request" id="btnSignReqby" checkSign="/request/sign/requestby">sign</button>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="selectReqEmail_Request" class="col-sm-3 form-control-label">Email</label>
+                            <div class="col-sm-9 input-group select2-bootstrap-append">
+                              <select id="selectReqEmail_Request" class="form-control select2-multiple selectEmail " multiple="multiple">
+                                <!-- <option>Email 1</option>
+                                <option>Email 2</option>
+                                <option>Email 3</option> -->
+                              </select>
+                              <span class="input-group-btn">
+                                <button class="btn btn-default black sendMail disBtn_mail"id="btnSendEmail_Request" type="button" data-select2-open="multi-append" checkRout="/request/sendmail" >
+                                  <span class="fa fa-send"></span>
+                                </button>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--* status engineer reply  -->
+                <div class="card displayShow" id="headingEnReply">
+                  <div class="box-header" >
+                    <h2 class="mb-0">
+                      <button
+                        class="btn btn-block text-left collapsed"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#collapseEnreply"
+                        aria-expanded="false"
+                        aria-controls="collapseEnreply"
+                      >
+                        Engineer Reply
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseEnreply" class="collapse" aria-labelledby="" data-parent="#accordionExample">
+                    <div class="box-body">
+                      <div class="row">
+                        <div class="col-12 m-b-md">
+                          <div class="input-group justify-content-end">
+                            <button class="btn btn-fw success disButton_complete" type="button" id="btnSave_Engineer">
+                              <i class="fa fa-save"></i><span class="ml-2 hidden-xs">Save</span>
+                            </button>
+                          </div>
+                        </div>
+                        <div class="col-12 col-xl-8"></div>
+                        <div class="col-12 col-xl-4">
+                          <div class="form-group row">
+                            <label for="inputRefNo" class="col-sm-3 form-control-label">Ref Code</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" id="inputRefNo" disabled placeholder="" autocomplete="off" required/>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                          <div class="card-new">
+                            <h5 class="m-b-md">Risk Analysis & Parts Characteristics to be effected</h5>
+                            <div class="p-x" id="RiskAnalysisBody">
+                              <!-- <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 riskPartsEffected_checkbox" >
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="1" />
+                                    <i class="green"></i>
+                                    None afftected
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 riskPartsEffected_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="2" />
+                                    <i class="green"></i>
+                                    Shape, Dimension
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 riskPartsEffected_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="3" />
+                                    <i class="green"></i>
+                                    Funtion, Performance
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 riskPartsEffected_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="4" />
+                                    <i class="green"></i>
+                                    Appearance, Grain
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 riskPartsEffected_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="5" />
+                                    <i class="green"></i>
+                                    Safety, Environment
+                                  </label>
+                                </div>
+                              </div>
+
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 riskPartsEffected_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="6" />
+                                    <i class="green"></i>
+                                    New item
+                                  </label>
+                                </div>
+                              </div> -->
+                            </div>
+                          </div>
+
+                        </div>
+                        <div class="col-12 col-md-6">
+                          <div class="card-new">
+                            <h5 class="m-b-md">Quality Document Conncern</h5>
+                            <div class="p-x" id="QuaDocConncernBody">
+                              <!-- <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 quality_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="1" />
+                                    <i class="green"></i>
+                                    New Drawing Change
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 quality_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="2" />
+                                    <i class="green"></i>
+                                    Dimension, Appearance check result
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100">
+                                  <label class="md-check m-0 quality_checkbox">
+                                    <input type="checkbox" value="3" />
+                                    <i class="green"></i>
+                                    Cpk, MSA result
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100">
+                                  <label class="md-check m-0 quality_checkbox">
+                                    <input type="checkbox" value="4" />
+                                    <i class="green"></i>
+                                    FMEA, Flow process, Control plan
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100">
+                                  <label class="md-check m-0 quality_checkbox">
+                                    <input type="checkbox" value="5" />
+                                    <i class="green"></i>
+                                    Inspection standard
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100">
+                                  <label class="md-check m-0 quality_checkbox">
+                                    <input type="checkbox" value="6" />
+                                    <i class="green"></i>
+                                    Working standard
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 quality_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="7" />
+                                    <i class="green"></i>
+                                    Packing standard
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 quality_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="8" />
+                                    <i class="green"></i>
+                                    Injection molding standard
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 quality_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="9" />
+                                    <i class="green"></i>
+                                    RUN @ Rate result
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 quality_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="10" />
+                                    <i class="green"></i>
+                                    Evalueate process result
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 quality_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="11" />
+                                    <i class="green"></i>
+                                    Internal audit process
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 quality_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="12" />
+                                    <i class="green"></i>
+                                    Sample part for approved
+                                  </label>
+                                </div>
+                              </div>
+
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="checkbox w-100 quality_checkbox">
+                                  <label class="md-check m-0">
+                                    <input type="checkbox" value="13" />
+                                    <i class="green"></i>
+                                    New item
+                                  </label>
+                                </div>
+                              </div> -->
+                            </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row m-t-md">
+                        <div class="col-12 col-md-4">
+                          <div class="card-new">
+                            <h5 class="m-b-md">Rank Confirmation</h5>
+                            <div class="p-x" id="RankConfirmBody">
+                              <!-- <div class="input-group align-items-center m-b-sm">
+                                <div class="radio w-100">
+                                  <label class="md-check m-0">
+                                    <input type="radio" name="RankCon" value="1"/>
+                                    <i class="green"></i>
+                                    A
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="radio w-100">
+                                  <label class="md-check m-0">
+                                    <input type="radio" name="RankCon" value="2"/>
+                                    <i class="green"></i>
+                                    B / C
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="input-group align-items-center m-b-sm">
+                                <div class="radio w-100">
+                                  <label class="md-check m-0">
+                                    <input type="radio" name="RankCon" value="3"/>
+                                    <i class="green"></i>
+                                    None
+                                  </label>
+                                </div>
+                              </div> -->
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-12 col-md-4" >
+                          <div class="dis_CusConfirmation">
+                          <h5 class="m-b-md">Customer Confirmation</h5>
+                          
+                          <div class="p-x">
+                            <div class="input-group align-items-center m-b-sm">
+                              <div class="radio w-100">
+                                <label class="md-check m-0">
+                                  <input class="cleanRadio" type="radio" name="CustomerCom" value="2" />
+                                  <i class="green"></i>
+                                  Inform Customer
+                                </label>
+                              </div>
+                            </div>
+                            <div class="input-group align-items-center m-b-sm">
+                              <div class="radio w-100">
+                                <label class="md-check m-0">
+                                  <input class="cleanRadio" type="radio" name="CustomerCom" value="1" />
+                                  <i class="green"></i>
+                                  Not Inform Customer
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                          <div class="form-group row">
+                            <label for="showReply_EngRq" class="col-sm-3 form-control-label">Reply by</label>
+                            <div class="col-sm-9 input-group">
+                              <input type="text" class="form-control text-center" id="showReply_EngRq" placeholder="" autocomplete="off" readonly />
+                              <div class="input-group-btn">
+                                <button class="btn btn-default black btn-swal-sign disButton_complete" type="button" swal-title="REPLY BY" swal-target="showReply_EngRq" id="btnSignReplyby"  checkSign="/engreply/sign/reply">sign</button>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="selectReplyEmail" class="col-sm-3 form-control-label">Email</label>
+                            <div class="col-sm-9 input-group select2-bootstrap-append">
+                              <select id="selectReplyEmail" class="form-control select2-multiple selectEmail " multiple="multiple">
+                                <option>Email 1</option>
+                                <option>Email 2</option>
+                                <option>Email 3</option>
+                              </select>
+                              <span class="input-group-btn">
+                                <button class="btn btn-default black sendMail disBtn_mail" id="btnSendEmail_EngRq" data-select2-open="multi-append" checkRout="/engreply/sendmail">
+                                  <span class="fa fa-send"></span>
+                                </button>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--* status approve plan  -->
+                <div class="card displayShow" id="headingApprovePlan">
+                  <div class="box-header" >
+                    <h2 class="mb-0">
+                      <button
+                        class="btn btn-block text-left collapsed"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#collapseApprovePlan"
+                        aria-expanded="false"
+                        aria-controls="collapseApprovePlan"
+                      >
+                        Approve Plan
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseApprovePlan" class="collapse" aria-labelledby="headingApprovePlan" data-parent="#accordionExample">
+                    <div class="box-body">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="input-group justify-content-end">
+                            <button class="btn btn-fw success disButton_complete" type="button" id="btnSave_approvePlan">
+                              <i class="fa fa-save"></i><span class="ml-2 hidden-xs">Save</span>
+                            </button>
+                          </div>
+                        </div>
+                        <!-- <div class="col-12 col-xl-6">
+                          <div class="form-group row">
+                            <label for="inputEnName" class="col-sm-3 form-control-label">From</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" id="inputEnName" placeholder="En Login Name" autocomplete="off" required />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-xl-6">
+                          <div class="form-group row">
+                            <label for="inputRequester" class="col-sm-3 form-control-label">To</label>
+                            <div class="col-sm-9">
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="inputRequester"
+                                placeholder="Requester Login Name"
+                                autocomplete="off"
+                                required
+                              />
+                            </div>
+                          </div>
+                        </div> -->
+                      </div>
+
+                      <!-- <div class="box-divider m-0"></div> -->
+                      <div class="row m-y-md">
+                        <div class="col-12">
+                          <h5 class="m-b-md">Answer / Instruction To Plan</h5>
+                          <!-- <div class="form-group row">
+                            <label for="selectVerifyData" class="col-sm-2 form-control-label">Verify Data</label>
+                            <div class="col-sm-10 input-group select2-bootstrap-append">
+                              <input type="text" class="form-control" id="inputTbVerifyData_ApprovePlan" placeholder="new item" autocomplete="off" />
+                              <span class="input-group-btn">
+                                <button class="btn btn-default success" type="button" id="saveTbVerifyData_ApprovePlan">
+                                  <span class="fa fa-plus"></span>
+                                </button>
+                              </span>
+                            </div>
+                          </div> -->
+                          <div class="table-responsive text-nowrap m-t-sm">
+                            <table id="tbVerifyData_ApprovePlan" class="text-center table-bordered b-t b-b table m-0 w-100">
+                              <thead>
+                                <tr>
+                                  <th>No</th>
+                                  <th>Verify Data</th>
+                                  <th>Data / Remark</th>
+                                  <!-- <th>Action</th> -->
+                                </tr>
+                              </thead>
+                              <tbody class="text-center" id="tbodyTbVerifyData_ApprovePlan">
+                                <!-- <tr>
+                                  <td>1</td>
+                                  <td>Meeting for explanation</td>
+                                  <td><input type="text" class="form-control" /></td>
+                                  <td>
+                                    <button class="btn btn-sm danger h-100" type="button">
+                                      <span class="fa fa-trash"></span>
+                                    </button>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>2</td>
+                                  <td>Sample part & Inspection result submission</td>
+                                  <td><input type="text" class="form-control" /></td>
+                                  <td>
+                                    <button class="btn btn-sm danger h-100" type="button">
+                                      <span class="fa fa-trash"></span>
+                                    </button>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>3</td>
+                                  <td>Quality document concern revisised</td>
+                                  <td><input type="text" class="form-control" /></td>
+                                  <td>
+                                    <button class="btn btn-sm danger h-100" type="button">
+                                      <span class="fa fa-trash"></span>
+                                    </button>
+                                  </td>
+                                </tr> -->
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="box-divider m-0"></div>
+
+                      <div class="row m-y-md">
+                        <div class="col-12 col-md-6 d-flex align-items-center">
+                          <h5 class="m-b-md">Plan Judgement</h5>
+                        
+                          <div class="p-x d-flex ml-3">
+                            <div class="d-flex">
+                              <div class="radio">
+                                <label class="md-check m-0">
+                                  <input type="radio" name="PlanJudgement" value="1" />
+                                  <i class="green"></i>
+                                  Approve
+                                </label>
+                              </div>
+                        
+                              <div class="radio ml-3">
+                                <label class="md-check m-0">
+                                  <input type="radio" name="PlanJudgement" value="2" />
+                                  <i class="green"></i>
+                                  Not Approve
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        
+                      </div>
+                      <div class="row m-y-md">
+                        <div class="col-12 col-xl-6 m-b-sm">
+                          <h5 class="m-b-md">Signature Approval</h5>
+                          <div class="table-responsive text-nowrap m-t-sm">
+                            <table class="text-center table-bordered b-t b-b table m-0 w-100">
+                              <thead>
+                                <tr>
+                                  <th colspan="2" class="text-center">Engineer / PE Sect</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>Checked</td>
+                                  <td>
+                                    <div class="form-group row">
+                                      <div class="col-sm-12 input-group">
+                                        <input
+                                          type="text"
+                                          class="form-control text-center"
+                                          id="showEnPeChecked_ApPlan"
+                                          placeholder=""
+                                          autocomplete="off"
+                                          readonly
+                                        />
+                                        <div class="input-group-btn">
+                                          <button class="btn btn-default black btn-swal-sign disButton_complete" type="button" swal-title="CHECKED BY" swal-target="showEnPeChecked_ApPlan"  id="btnSignCheckApPlan" checkSign="/approveplan/sign/chcekBy">sign</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Approved</td>
+                                  <td>
+                                    <div class="form-group row">
+                                      <div class="col-sm-12 input-group">
+                                        <input
+                                          type="text"
+                                          class="form-control text-center"
+                                          id="showEnPeApproved_ApPlan"
+                                          placeholder=""
+                                          autocomplete="off"
+                                          readonly
+                                        />
+                                        <div class="input-group-btn">
+                                          <button class="btn btn-default black btn-swal-sign disButton_complete" type="button" swal-title="APPROVED BY" swal-target="showEnPeApproved_ApPlan"  id="btnSignApApPlan" checkSign="/approveplan/sign/approveby">sign</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        <div class="col-12 col-xl-6">
+                          <div class="form-group row">
+                            <label for="selectConcernDept" class="col-sm-3 form-control-label">Concern Dept</label>
+                            <div class="col-sm-9 input-group select2-bootstrap-append">
+                              <select id="selectConcernDept_approvePlan" class="form-control select2-multiple selectElement disSelect_complete" multiple="multiple">
+                                <!-- <option value="1" data-sign="QA / QC">1.QA / QC</option>
+                                <option value="2" data-sign="Production">2.Production</option>
+                                <option value="3" data-sign="PU">3.PU</option>
+                                <option value="4" data-sign="Planing">4.Planing</option>
+                                <option value="5" data-sign="DC">5.DC</option>
+                                <option value="6" data-sign="MM">6.MM</option> -->
+                              </select>
+                            </div>
+                          </div>
+                          <div class="table-responsive text-nowrap m-t-sm">
+                            <table id="tbConcern_approvePlan" class="text-center table-bordered b-t b-b table m-0 w-100">
+                              <thead>
+                                <tr>
+                                  <th colspan="2" class="text-center">Agreement</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="box-divider m-0"></div>
+                      <div class="row m-y-md">
+                        <div class="col-12 col-xl-12">
+                          <div class="form-group row">
+                            <label for="inputComment" class="col-sm-2 form-control-label">Comment</label>
+                            <div class="col-sm-10">
+                              <textarea class="form-control" rows="2" id="inputComment_ApPlan"></textarea>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                          <!-- <h5 class="m-b-md">Plan Judgement</h5> -->
+<!-- 
+                          <div class="p-x">
+                            <div class="input-group align-items-center m-b-sm">
+                              <div class="radio w-100">
+                                <label class="md-check m-0">
+                                  <input type="radio" name="PlanJudgement" value="1" />
+                                  <i class="green"></i>
+                                  Approve
+                                </label>
+                              </div>
+                            </div>
+                            <div class="input-group align-items-center m-b-sm">
+                              <div class="radio w-100">
+                                <label class="md-check m-0">
+                                  <input type="radio" name="PlanJudgement" value="2" />
+                                  <i class="green"></i>
+                                  Not Approve
+                                </label>
+                              </div>
+                            </div>
+                          </div> -->
+                        </div>
+                        <div class="col-12 col-xl-6">
+                          <div class="form-group row">
+                            <label for="showAppSubmitPlan" class="col-sm-3 form-control-label">Submit Plan by</label>
+                            <div class="col-sm-9 input-group">
+                              <input type="text" class="form-control text-center" id="showAppSubmitPlan" placeholder="" autocomplete="off" readonly />
+                              <div class="input-group-btn">
+                                <button class="btn btn-default black btn-swal-sign disButton_complete" type="button" swal-title="SUBMIT PLAN BY" swal-target="showAppSubmitPlan"  id="btnSignSubmitPlaApPlan" checkSign="/approveplan/sign/submitplanby">sign</button>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="selectPlanEmail" class="col-sm-3 form-control-label">Email</label>
+                            <div class="col-sm-9 input-group select2-bootstrap-append">
+                              <select id="selectPlanEmail" class="form-control select2-multiple selectEmail" multiple="multiple">
+                                <!-- <option>Email 1</option>
+                                <option>Email 2</option>
+                                <option>Email 3</option> -->
+                              </select>
+                              <span class="input-group-btn">
+                                <button class="btn btn-default black sendMail disBtn_mail" id="btnSendEmail_Plan" type="button" data-select2-open="multi-append" checkRout="/approveplan/sendmail">
+                                  <span class="fa fa-send"></span>
+                                </button>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!--* status approve Start New Condition  -->
+                <div class="card displayShow" id="headingStartNew">
+                  <div class="box-header" >
+                    <h2 class="mb-0">
+                      <button
+                        class="btn btn-block text-left collapsed"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#collapseStartNew"
+                        aria-expanded="false"
+                        aria-controls="collapseStartNew"
+                      >
+                        Approve Start New Condition
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseStartNew" class="collapse" aria-labelledby="headingStartNew" data-parent="#accordionExample">
+                    <div class="box-body">
+                      <div class="row">
+                        <div class="col-12 m-b-md">
+                          <div class="input-group justify-content-end">
+                            <button class="btn btn-fw success disButton_complete" type="button" id="btnSave_approveStart">
+                              <i class="fa fa-save"></i><span class="ml-2 hidden-xs">Save</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 col-xl-6">
+                          <div class="form-group row">
+                            <label for="inputRequester" class="col-sm-5 form-control-label">Imprement with product Lot No.</label>
+                            <div class="col-sm-7">
+                              <input type="text" class="form-control disInput_complete" id="inputImprement" placeholder="" autocomplete="off" required />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-xl-6">
+                          <div class="form-group row">
+                            <label for="inputEffProd" class="col-sm-3 form-control-label">Effective Prod Date</label>
+                            <div class="col-sm-9">
+                              <input type="date" class="form-control disInput_complete" id="inputEffProd" placeholder="" autocomplete="off" required />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="box-divider m-0"></div>
+
+                      <div class="row m-y-md">
+                        <div class="col-12 col-xl-6 m-b-sm">
+                          <h5 class="m-b-md">Signature Approval</h5>
+                          <div class="table-responsive text-nowrap m-t-sm">
+                            <table class="text-center table-bordered b-t b-b table m-0 w-100">
+                              <thead>
+                                <tr>
+                                  <th colspan="2" class="text-center">Engineer / PE Sect</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>Checked</td>
+                                  <td>
+                                    <div class="form-group row">
+                                      <div class="col-sm-12 input-group">
+                                        <input
+                                          type="text"
+                                          class="form-control text-center"
+                                          id="showEnPeChecked_startNew"
+                                          placeholder=""
+                                          autocomplete="off"
+                                          readonly
+                                        />
+                                        <div class="input-group-btn">
+                                          <button class="btn btn-default black btn-swal-sign disButton_complete" type="button" swal-title="CHECKED BY" swal-target="showEnPeChecked_startNew"  id="btnSignCheckStartNew" checkSign="/approvestart/sign/checkby">sign</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Approved</td>
+                                  <td>
+                                    <div class="form-group row">
+                                      <div class="col-sm-12 input-group">
+                                        <input
+                                          type="text"
+                                          class="form-control text-center"
+                                          id="showEnPeApproved_startNew"
+                                          placeholder=""
+                                          autocomplete="off"
+                                          readonly
+                                        />
+                                        <div class="input-group-btn">
+                                          <button class="btn btn-default black btn-swal-sign disButton_complete" type="button" swal-title="APPROVED BY" swal-target="showEnPeApproved_startNew"  id="btnSignApStartNew" checkSign="/approvestart/sign/approveby">sign</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                              </tbody>
+                            </table>
+                          </div>
+                          <div class="form-group row m-t-md">
+                            <h5 for="" class="col-12 text-center">Customer Approve</h5>
+                            <div class="col-12 m-b-sm">
+                              <div class="form-file">
+                                <input type="file" id="input_PDFfile_PMCheckFile" accept=".pdf" />
+                                <button class="btn white w-100 disButton_complete" id="btnUploadFile_PMCheckFile">Select file ...</button>
+                                
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <button class="btn btn-default w-100 dark" type="button" id="viewPDF" >
+                                <i class="fa fa-eye"></i><span class="ml-2">View</span>
+                              </button>
+                              <!-- <label for="" class="col-sm-3 form-control-label text-end" id="fileName_approveStart"></label> -->
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-xl-6">
+                          <div class="form-group row">
+                            <label for="selectConcernDept" class="col-sm-3 form-control-label">Concern Dept</label>
+                            <div class="col-sm-9 input-group select2-bootstrap-append">
+                              <select id="selectConcernDept_approveStart" class="form-control select2-multiple selectElement disSelect_complete" multiple="multiple">
+                                <!-- <option value="1">1.QA / QC</option>
+                                <option value="2">2.Production</option>
+                                <option value="3">3.PU</option>
+                                <option value="4">4.Planing</option>
+                                <option value="5">5.DC</option>
+                                <option value="6">6.MM</option> -->
+                              </select>
+                            </div>
+                          </div>
+                          <div class="table-responsive text-nowrap m-t-sm m-b-md">
+                            <table id="tbConcern_approveStart" class="text-center table-bordered b-t b-b table m-0 w-100">
+                              <thead>
+                                <tr>
+                                  <th colspan="2" class="text-center">Agreement</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <!-- <tr>
+                                  <td>QA / QC</td>
+                                  <td>
+                                    <div class="form-group row">
+                                      <div class="col-sm-12 input-group">
+                                        <input
+                                          type="text"
+                                          class="form-control text-center"
+                                          id="showQcQa"
+                                          placeholder=""
+                                          autocomplete="off"
+                                          readonly
+                                        />
+                                        <div class="input-group-btn">
+                                          <button class="btn btn-default black btnTestSign" type="button" swal-title="QC / QA BY">sign</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Production</td>
+                                  <td>
+                                    <div class="form-group row">
+                                      <div class="col-sm-12 input-group">
+                                        <input
+                                          type="text"
+                                          class="form-control text-center"
+                                          id="showProduction"
+                                          placeholder=""
+                                          autocomplete="off"
+                                          readonly
+                                        />
+                                        <div class="input-group-btn">
+                                          <button class="btn btn-default black btnTestSign" type="button" swal-title="PRODUCTION BY">sign</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>PU</td>
+                                  <td>
+                                    <div class="form-group row">
+                                      <div class="col-sm-12 input-group">
+                                        <input type="text" class="form-control text-center" id="showPU" placeholder="" autocomplete="off" readonly />
+                                        <div class="input-group-btn">
+                                          <button class="btn btn-default black btnTestSign" type="button" swal-title="PU BY">sign</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr> -->
+                              </tbody>
+                            </table>
+                          </div>
+                          <div class="form-group row">
+                            <label for="selectStartNewEmail" class="col-sm-3 form-control-label">Email</label>
+                            <div class="col-sm-9 input-group select2-bootstrap-append">
+                              <select id="selectStartNewEmail" class="form-control select2-multiple selectEmail" multiple="multiple">
+                                <option>Email 1</option>
+                                <option>Email 2</option>
+                                <option>Email 3</option>
+                              </select>
+                              <span class="input-group-btn">
+                                <button class="btn btn-default black sendMail disBtn_mail" id="btnSendEmail_StartNew" type="button" data-select2-open="multi-append" checkRout="/approvestart/sendmail">
+                                  <span class="fa fa-send"></span>
+                                </button>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="box-divider m-0"></div>
+                      <div class="row m-y-md">
+                        <div class="col-12 col-xl-12">
+                          <div class="form-group row">
+                            <label for="inputComment" class="col-sm-2 form-control-label">Comment</label>
+                            <div class="col-sm-10">
+                              <textarea class="form-control" rows="2" id="inputComment_ApStart"></textarea>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+
+                        </div>
+                        <div class="col-12 col-xl-6">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / content -->
+    </div>
+  </body>
+  <!-- build:js scripts/app.html.js -->
+  <!-- jQuery -->
+  <script src="/jquery/jquery/dist/jquery.js"></script>
+  <!-- Bootstrap -->
+  <script src="/jquery/tether/dist/js/tether.min.js"></script>
+  <script src="/jquery/bootstrap/dist/js/bootstrap.js"></script>
+  <!-- core -->
+  <script src="/jquery/underscore/underscore-min.js"></script>
+  <script src="/jquery/jQuery-Storage-API/jquery.storageapi.min.js"></script>
+  <script src="/jquery/PACE/pace.min.js"></script>
+
+  <!-- datatables -->
+  <script src="/jquery/datatables/media/js/jquery.dataTables.min.js"></script>
+  <script src="/scripts_page/ppc/ppc.js"></script>
+  <script src="/scripts_page/function.js"></script>
+
+  <!-- datatables libs print button -->
+  <script src="/jquery/datatables/js/dataTables.js"></script>
+  <script src="/jquery/datatables/js/dataTables.buttons.js"></script>
+  <script src="/jquery/datatables/js/buttons.dataTables.js"></script>
+  <script src="/jquery/datatables/js/jszip.min.js"></script>
+  <script src="/jquery/datatables/js/pdfmake.min.js"></script>
+  <script src="/jquery/datatables/js/vfs_fonts.js"></script>
+  <script src="/jquery/datatables/js/buttons.html5.min.js"></script>
+  <script src="/jquery/datatables/js/buttons.print.min.js"></script>
+
+  <!-- select2 -->
+  <script src="/jquery/select2/dist/js/select2.min.js"></script>
+  <script src="/js/testSelect2.js"></script>
+  
+  <!-- pdf -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js"></script>
+ 
+  <!-- sweetalert2 -->
+  <script src="/jquery/swalalert2/swalalert2.js"></script>
+  <script src="/js/testSwalalert2.js"></script>
+
+</html>

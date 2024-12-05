@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>TS Molymer: Project</title>
+  <meta name="description" content="Admin, Dashboard, Bootstrap, Bootstrap 4, Angular, AngularJS" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- for ios 7 style, multi-resolution icon of 152x152 -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent" />
+  <link rel="apple-touch-icon" href="/images/Logo-Noname.png" />
+  <meta name="apple-mobile-web-app-title" content="Flatkit" />
+  <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
+  <meta name="mobile-web-app-capable" content="yes" />
+  <link rel="shortcut icon" sizes="196x196" href="/images/Logo-Noname.png" />
+
+  <!-- style -->
+  <link rel="stylesheet" href="/animate.css/animate.min.css" type="text/css" />
+  <link rel="stylesheet" href="/glyphicons/glyphicons.css" type="text/css" />
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="/material-design-icons/material-design-icons.css" type="text/css" />
+
+  <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+  <!-- build:css /styles/app.min.css -->
+  <link rel="stylesheet" href="/styles/app.css" type="text/css" />
+  <!-- endbuild -->
+  <link rel="stylesheet" href="/styles/font.css" type="text/css" />
+  <!-- datatables -->
+  <link rel="stylesheet" href="/styles/datatables.min.css" type="text/css" />
+  <!-- datatables libs print button -->
+  <link rel="stylesheet" href="/jquery/datatables/css/buttons.dataTables.css" />
+  <link rel="stylesheet" href="/jquery/datatables/css/dataTables.dataTables.css" />
+  <!-- select2 -->
+  <link rel="stylesheet" href="/jquery/select2/dist/css/select2.min.css" />
+  <link rel="stylesheet" href="/jquery/select2-bootstrap-theme/dist/select2-bootstrap.min.css" />
+  <link rel="stylesheet" href="/jquery/select2-bootstrap-theme/dist/select2-bootstrap.4.css" />
+
+  <link rel="stylesheet" href="/styles/datatables.style.css" />
+</head>
+
+<body>
+  <div class="app" id="app">
+    <!-- ############ LAYOUT START-->
+
+    <!-- aside -->
+    <div id="aside" class="app-aside modal fade nav-expand">
+      <div class="left navside black dk" layout="column">
+        <div class="navbar no-radius">
+          <!-- brand -->
+          <a class="navbar-brand" href="/">
+            <!-- <div ui-include="'../images/logo.svg'"></div> -->
+            <img src="/images/Logo-Noname.png" alt="." class="" />
+            <span class="hidden-folded inline" style="font-size: 1.1rem">TS MOLYMER</span>
+          </a>
+          <!-- / brand -->
+        </div>
+        <div class="nav-fold">
+          
+            <span class="clear hidden-folded p-x">
+              <span class="block _500 show-user-name" id="userName"></span>
+              <small class="block text-muted" id="departmentName"></small>
+              <small class="block text-muted" id="userPosition"></small>
+            </span>
+          
+        </div>
+        <div flex class="hide-scroll">
+          <nav class="scroll nav-stacked nav-active-primary">
+            <ul class="nav">
+              <!-- <li class="nav-header hidden-folded">
+                  <small class="text-muted">Master</small>
+                </li> -->
+              <li class="active" >
+                <a href="/">
+                  <!-- <span class="nav-icon">
+                      <i class="material-icons">&#xe3fc; </i>
+                    </span> -->
+                  <span class="nav-label">
+                    <b class="label label-sm danger" id="countPJissue"></b>
+                  </span>
+                  <span class="nav-text">Project</span>
+                </a>
+              </li>
+
+              <li class="">
+                <a href="/ppc">
+                  <!-- <span class="nav-icon">
+                      <i class="material-icons">&#xe8d2; </i>
+                    </span> -->
+                  <span class="nav-label">
+                    <b class="label label-sm danger" id="countPPCissue"></b>
+                  </span>
+                  <span class="nav-text">PPC</span>
+                </a>
+              </li>
+              <li class="">
+                <a href="/ecn">
+                  <!-- <span class="nav-icon">
+                      <i class="material-icons">&#xe8d2; </i>
+                    </span> -->
+                  <span class="nav-label">
+                    <b class="label label-sm danger" id="countECNissue"></b>
+                  </span>
+                  <span class="nav-text">ECN</span>
+                </a>
+              </li>
+              <li class="nav-mst-default">
+                <a href="/mstDefault">
+                  <!-- <span class="nav-icon">
+                      <i class="material-icons">&#xe8d2; </i>
+                    </span> -->
+                  <!-- <span class="nav-label">
+                      <b class="label label-sm danger" id="countECNissue">1</b>
+                    </span> -->
+                  <span class="nav-text">Master Default</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <nav ui-nav>
+          <ul class="nav">
+            <li>
+              <div class="b-b b m-t-sm"></div>
+            </li>
+            <li class="no-bg">
+              <a href="/user/logout" class="button">
+                <span class="nav-icon">
+                  <i class="material-icons">&#xe8ac;</i>
+                </span>
+                <span class="nav-text">Logout</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <!-- / aside -->
+
+    <!-- content -->
+    <div id="content" class="app-content box-shadow-z1" role="main">
+      <div class="navbar navbar-toggleable-sm flex-row align-items-center hidden-lg-up">
+        <a data-toggle="collapse" data-target="#navbar-1" class="navbar-item mr-3 hidden-md-up">
+          <i class="material-icons">&#xe5d2;</i>
+        </a>
+        <!-- brand -->
+        <a class="navbar-brand" href="/">
+          <!-- <div ui-include="'../images/logo.svg'"></div> -->
+          <img src="/images/Logo-Noname.png" alt="." class="" />
+          <span class="hidden-folded inline" style="font-size: 1.1rem">TS MOLYMER</span>
+        </a>
+        <!-- / brand -->
+        <!-- navbar collapse -->
+        <div class="collapse navbar-collapse" id="navbar-1">
+          <!-- link and dropdown -->
+          <ul class="nav navbar-nav text-{{app.setting.theme.primary}}-hover">
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <span class="nav-text">Project</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/ppc">
+                <span class="nav-text">PPC</span>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/ecn">
+                <span class="nav-text">ECN</span>
+              </a>
+            </li>
+
+            <li class="nav-item nav-mst-default">
+              <a class="nav-link" href="/mstDefault">
+                <span class="nav-text">Master Default</span>
+              </a>
+            </li>
+          </ul>
+          <!-- / link and dropdown -->
+        </div>
+        <!-- / navbar collapse -->
+
+        <!-- nabar right -->
+        <ul class="nav navbar-nav flex-row align-items-center ml-auto">
+          <li class="nav-item dropdown">
+            <span class="text-nowrap show-user-name"></span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/user/logout">
+              <span class="hidden-xs-down btn btn-sm rounded btn-outline b-danger text-u-c _600"> Logout </span>
+              <span class="hidden-sm-up">
+                <i class="material-icons">&#xe8ac;</i>
+              </span>
+            </a>
+          </li>
+        </ul>
+        <!-- / navbar right -->
+      </div>
+
+      <div ui-view class="app-body padding" id="view">
+        <div class="row">
+          <div class="col-12">
+            <div class="box">
+              <div class="box-header d-flex align-items-center justify-content-between">
+                <h2 class="">Project List</h2>
+                <div class="form-group row m-0">
+                  <div class="col p-0">
+                    <button type="button" class="btn btn-fw blue-600" id="btnPJadd">
+                      <i class="fa fa-plus"></i><span class="hidden-xs-down ml-2">Add</span>
+                    </button>
+                    <!-- <button type="button" class="btn btn-fw info d-none show-edit" id="btnPJedit">
+                      <i class="fa fa-edit"></i><span class="hidden-xs-down ml-2">Edit</span>
+                    </button> -->
+                    <!-- <button type="button" class="btn btn-fw danger d-none show-edit" id="btnPJdel">
+                      <i class="fa fa-trash-o"></i><span class="hidden-xs-down ml-2">Delete</span>
+                    </button> -->
+                  </div>
+                </div>
+              </div>
+
+              <div class="table-responsive text-nowrap p-x-md p-y-md">
+                <div class="row m-0 mt-3">
+                  <div class="col"></div>
+                  <div class="col">
+                    <div class="form-group row">
+                    <label class="form-control-label col-4" for="searchMonth">Search Month</label>
+                    <input type="month" class="form-control form-control-sm col-8 month-input" id="searchMonth" placeholder="Select" value="YYYY-MM" autocomplete="off" required>
+                    </div>
+                  </div>
+                  <div class="col"></div>
+              </div>
+                <table id="tablePJmaster" class="text-center table-bordered b-t b-b table m-0 w-100">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th style="max-width: 100px">
+                        Project<br class="hidden-lg-up" />
+                        Status
+                      </th>
+                      <th style="max-width: 100px">
+                        Part<br class="hidden-lg-up" />
+                        Status
+                      </th>
+                      <th>Customer</th>
+                      <th>Model</th>
+                      <th>Ref Code.</th>
+                      <th>
+                        Issue<br class="hidden-lg-up" />
+                        Date
+                      </th>
+                      <th>
+                        SOP<br class="hidden-lg-up" />
+                        Date
+                      </th>
+                      <th>Revise No.</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- <tr>
+                      <td>1</td>
+                      <td><span class="label grey-600 w-75">Issue</span></td>
+                      <td><span class="label green w-75">Completed</span></td>
+                      <td>Denso</td>
+                      <td>Cover</td>
+                      <td>EN-YYMM000</td>
+                      <td>26 May 2024</td>
+                      <td>26 May 2024</td>
+                      <td>0</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td><span class="label warn w-75">Checked</span></td>
+                      <td><span class="label danger w-75">Pending</span></td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td><span class="label blue w-75">Approved</span></td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td><span class="label green w-75">SOP Approved</span></td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                    </tr>
+                    <tr>
+                      <td>6</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                    </tr>
+                    <tr>
+                      <td>7</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                    </tr>
+                    <tr>
+                      <td>8</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                    </tr>
+                    <tr>
+                      <td>9</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                    </tr>
+                    <tr>
+                      <td>10</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                    </tr>
+                    <tr>
+                      <td>11</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                    </tr> -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 d-none" id="modalPJmanagement">
+            <div class="box">
+              <div class="box-header">
+                <h2>Project Management</h2>
+              </div>
+              <div class="box-divider m-0"></div>
+              <div class="box-body">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group row">
+                      <div class="col d-flex justify-content-between align-items-center">
+                        <div>
+                          <button type="submit" class="btn btn-fw blue-600 show-edit d-none" id="btnRevise">
+                            <span class="">Assign Part</span>
+                          </button>
+                        </div>
+                        <div class="d-flex ">
+                       <div class="mr-2" id="btnEditAndSave">
+                        <!-- <button type="submit" class="btn btn-fw primary" id="btnPJsave">
+                          <i class="fa fa-save"></i><span class="hidden-xs-down ml-2">Save</span>
+                        </button> -->
+
+                      </div>
+                      <button type="button" class="btn btn-fw danger d-none show-edit" id="btnPJdel">
+                        <i class="fa fa-trash-o"></i><span class="hidden-xs-down ml-2">Delete</span>
+                      </button>
+                    </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group row">
+                      <label for="selectCustomer" class="col-sm-2 form-control-label">Customer</label>
+                      <div class="col-sm-10 input-group">
+                        <select id="selectCustomer" class="form-control select2-single select-customer">
+                          <!-- <option value="1">Customer 1</option>
+                          <option value="2">Customer 2</option>
+                          <option value="3">Customer 3</option> -->
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="inputRefCode" class="col-sm-2 form-control-label">Ref Code.</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputRefCode" placeholder="Ref Code"
+                          autocomplete="off" required disabled />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="inputModel" class="col-sm-2 form-control-label">Model</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputModel" placeholder="Model" autocomplete="off"
+                          required />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="inputSOPDate" class="col-sm-2 form-control-label">SOP Date</label>
+                      <div class="col-sm-10">
+                        <input type="date" class="form-control" id="inputSOPDate" 
+                          autocomplete="off" required  />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="inputTotal" class="col-sm-2 form-control-label">Total Parts</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputTotal" placeholder="Total"
+                          autocomplete="off" required disabled />
+                      </div>
+                    </div>
+                  </div>
+                  
+
+                  <div class="col-12 col-xl-5">
+                    <div class="form-group row">
+                      <label for="showIssue" class="col-sm-3 form-control-label">Issued by</label>
+                      <div class="col-sm-9 input-group">
+                        <input type="text" class="form-control text-center" id="showIssue" value="test test 12 May 2019"
+                          autocomplete="off" readonly />
+                        <div class="input-group-btn">
+                          <button class="btn btn-default black btn-swal-sign" type="button" swal-title="ISSUED BY"
+                            swal-target="showIssue" id="btnSignIssue" checkSign="/sign/issue">
+                            sign
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- todo แสดงหลังจาก Sign Issue -->
+                    <div class="form-group row show-edit d-none">
+                      <label for="showCheck" class="col-sm-3 form-control-label ">Checked by</label>
+                      <div class="col-sm-9 input-group">
+                        <input type="text" class="form-control text-center" id="showCheck" placeholder=""
+                          autocomplete="off" readonly />
+                        <div class="input-group-btn">
+                          <button class="btn btn-default black btn-swal-sign" type="button" swal-title="CHECKED BY"
+                            swal-target="showCheck" id="btnSignCheck" checkSign="/sign/check">
+                            sign
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- todo -->
+
+                    <!-- todo แสดงหลังจาก Sign Check -->
+                    <div class="form-group row show-edit d-none">
+                      <label for="showApprove" class="col-sm-3 form-control-label">Approved by</label>
+                      <div class="col-sm-9 input-group">
+                        <input type="text" class="form-control text-center" id="showApprove" placeholder=""
+                          autocomplete="off" readonly />
+                        <div class="input-group-btn">
+                          <button class="btn btn-default black btn-swal-sign" type="button" swal-title="APPROVED BY"
+                            swal-target="showApprove" id="btnSignApprove" checkSign="/sign/approve">
+                            sign
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- todo -->
+
+                    <!-- todo แสดงหลังจาก Sign Approve -->
+                    <div class="form-group row show-edit d-none">
+                      <label for="showApproveSOP" class="col-sm-3 form-control-label">SOP Approved by</label>
+                      <div class="col-sm-9 input-group">
+                        <input type="text" class="form-control text-center" id="showApproveSOP" placeholder=""
+                          autocomplete="off" readonly />
+                        <div class="input-group-btn">
+                          <button class="btn btn-default black btn-swal-sign" type="button" swal-title="SOP APPROVED BY"
+                            swal-target="showApproveSOP" id="btnSignApproveSOP" checkSign="/sign/sopapprove">
+                            sign
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- todo -->
+                  </div>
+                </div>
+
+                <div class="box-divider m-y-md"></div>
+                <div class="form-group row email d-none">
+                  <label for="selectEmail" class="col-sm-2 form-control-label">Email</label>
+                  <div class="col-sm-10 input-group select2-bootstrap-append">
+                    <select id="selectEmail" class="form-control select2-multiple select-department"
+                      multiple="multiple" checkRout="/request/sendmail">
+                      <!-- <option>Email 1</option>
+                      <option>Email 2</option>
+                      <option>Email 3</option> -->
+                    </select>
+                    <span class="input-group-btn">
+                      <button class="btn btn-default black sendMail" type="submit" id="btnPJsend" checkRout="/email/send">
+                        <span class="fa fa-send"></span>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- / content -->
+  </div>
+</body>
+<!-- build:js scripts/app.html.js -->
+<!-- jQuery -->
+<script src="/jquery/jquery/dist/jquery.js"></script>
+<!-- Bootstrap -->
+<script src="/jquery/tether/dist/js/tether.min.js"></script>
+<script src="/jquery/bootstrap/dist/js/bootstrap.js"></script>
+<!-- core -->
+<script src="/jquery/underscore/underscore-min.js"></script>
+<script src="/jquery/jQuery-Storage-API/jquery.storageapi.min.js"></script>
+<script src="/jquery/PACE/pace.min.js"></script>
+
+<!-- datatables -->
+<script src="/jquery/datatables/media/js/jquery.dataTables.min.js"></script>
+
+<!-- datatables libs print button -->
+<script src="/jquery/datatables/js/dataTables.js"></script>
+<script src="/jquery/datatables/js/dataTables.buttons.js"></script>
+<script src="/jquery/datatables/js/buttons.dataTables.js"></script>
+<script src="/jquery/datatables/js/jszip.min.js"></script>
+<script src="/jquery/datatables/js/pdfmake.min.js"></script>
+<script src="/jquery/datatables/js/vfs_fonts.js"></script>
+<script src="/jquery/datatables/js/buttons.html5.min.js"></script>
+<script src="/jquery/datatables/js/buttons.print.min.js"></script>
+
+<!-- select2 -->
+<script src="/jquery/select2/dist/js/select2.min.js"></script>
+
+<!-- swalalert2 -->
+<script src="/jquery/swalalert2/swalalert2.js"></script>
+
+<!-- script -->
+<script src="/scripts_page/function.js"></script>
+<script src="/scripts_page/Project/mstProject.js"></script>
+
+</html>

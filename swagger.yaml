@@ -1,0 +1,491 @@
+openapi: 3.0.0
+info:
+  title: Sample API
+  description: Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
+  version: 0.1.9
+
+servers:
+  - url: http://localhost:3100
+    description: Main (production) server
+  - url: http://localhost:3101
+    description: Development server
+
+tags:
+  - name: User
+    description: Operations related to user authentication
+  - name: PPC
+    description: Operations related to PPC
+  - name: PPC Request
+    description: Operations related to PPC Request
+  - name: PPC Engineer Reply
+    description: Operations related to PPC Engineer Reply
+  - name: PPC Approve
+    description: Operations related to PPC Approve
+  - name: PPC Complete
+    description: Operations related to PPC Complete
+paths:
+  /user/login:
+    post:
+      tags:
+        - User
+      summary: User login.
+      description: API สำหรับเข้าสู่ระบบ
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Username:
+                  type: string
+                Password:
+                  type: string
+      responses:
+        "200":
+          description: Login successful.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      UserID:
+                        type: integer
+                      EmployeeID:
+                        type: string
+                      name:
+                        type: string
+                      DepartmentName:
+                        type: string
+                      PositionName:
+                        type: string
+        "401":
+          description: Invalid Username or Password.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+
+  /user/logout:
+    get:
+      tags:
+        - User
+      summary: User logout.
+      description: API สำหรับออกจากระบบ
+      responses:
+        "200":
+          description: Logout successful.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+        "500":
+          description: Logout failed.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "RequestError: Invalid column name 'undefined.'"
+  
+  /ppc/getPPC:
+    post:
+      tags:
+        - PPC
+      summary: Get PPC
+      description: API สําหรับดึงข้อมูล PPC
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                CusConfirm:
+                  type: integer
+                RequestMonth:
+                  type: integer
+                RequestYear:
+                  type: integer
+      responses:
+        "200":
+          description: Get PPC successful.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+# Request
+  /ppc/request:
+    post:
+      tags:
+        - PPC Request
+      summary: Request PPC
+      description: API สำหรับเรียก PPC Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PPCID:
+                  type: integer
+      responses:
+        "200":
+          description: Request PPC successful.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+        "400":
+          description: PPC Is Requested.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: object
+                    example: "กรุณาส่งค่า Request"          
+  /ppc/request/add:
+    post:
+      tags:
+        - PPC Request
+      summary: Request PPC
+      description: API สำหรับเขียนข้อมูล PPC Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ProjectPartID:
+                  type: integer
+                SecRequest:
+                  type: integer
+                Subject:
+                  type: string
+                  example: "test"
+                ProjectTrialDate:
+                  type: string
+                  format: date
+                PlanImprementDate:
+                  type: string
+                  format: date
+                RequestDate:
+                  type: string
+                  format: date
+                ChangeItem:
+                  type: object
+                Reason:
+                  type: object
+                EffectivePeriod:
+                  type: object
+                NewProcess:
+                  type: string
+                  example: "test"
+                PreviousProcess:
+                  type: string
+                  example: "test"
+                RequestBy:
+                  type: integer
+                RequestSignTime:
+                  type: string
+                  format: date
+               
+      responses:
+        "200":
+          description: Request PPC successful.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+        "400":
+          description: Some Body Requested.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: object            
+  /ppc/request/edit:
+    put:
+      tags:
+        - PPC Request
+      summary: Edit Request PPC
+      description: API สำหรับแก้ไขข้อมูล PPC Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PPCID:
+                  type: integer
+                ProjectPartID:
+                  type: integer
+                SecRequest:
+                  type: integer
+                Subject:
+                  type: string
+                  example: "test"
+                ProjectTrialDate:
+                  type: string
+                  format: date
+                PlanImprementDate:
+                  type: string
+                  format: date
+                RequestDate:
+                  type: string
+                  format: date
+                ChangeItem:
+                  type: object
+                Reason:
+                  type: object
+                EffectivePeriod:
+                  type: object
+                NewProcess:
+                  type: string
+                  example: "test"
+                PreviousProcess:
+                  type: string
+                  example: "test"
+               
+      responses:
+        "200":
+          description: Request PPC successful.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+        "400":
+          description: Some Body Requested.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: object
+  /ppc/request/delete:
+    delete:
+      tags:
+        - PPC Request
+      summary: Request PPC
+      description: API สำหรับลบข้อมูล PPC Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PPCID:
+                  type: integer
+      responses:
+        "200":
+          description: Request PPC successful.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+        "400":
+          description: PPC Is Requested.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: object         
+  /ppc/request/sign/requestby:
+    put:
+      tags:
+        - PPC Request
+      summary: Sign Request PPC
+      description: API สำหรับ Sign PPC Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PPCReqID:
+                  type: integer
+                Username:
+                  type: string
+                  example: "test"
+                Password:
+                  type: string
+                  example: "test"
+                RequestSignTime:
+                  type: string
+                  format: date
+      responses:
+        "200":
+          description: Request PPC successful.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+        "401":
+          description: Username or Password Invalid.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: object            
+  /ppc/request/sendmail:
+    post:
+      tags:
+        - PPC Request
+      summary: Send Email PPC
+      description: API สำหรับส่ง Email PPC Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PPCReqID:
+                  type: integer
+                SendEmail:
+                  type: object
+              required:
+                - PPCReqID
+        responses:
+          "200":
+            description: Send Email PPC successful.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    data:
+                      type: object
+          "401":
+            description: 
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: object
+# End Request
+
+# Engineer Reply
+
+  /ppc/engreply:
+    post:
+      tags:
+        - PPC Engineer Reply
+      summary: Engineer Reply
+      description: API สำหรับ Engineer Reply
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PPCReplyID:
+                  type: integer
+      responses:
+        "200":
+          description: Engineer Reply successful.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+        "400":
+          description: PPCReplyID Is Requested.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: object
+  /ppc/engreply/add:
+    post:
+      tags:
+        - PPC Engineer Reply
+      summary: Add Engineer Reply
+      description: API สำหรับเพิ่มข้อมูล Engineer Reply
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PPCReplyID:
+                  type: integer
+                RiskAnalysis_PartEffect:
+                  type: object
+                QualityDocConcern:
+                  type: object
+                RankConfirmation:
+                  type: object
+                CustomerConfirmation:
+                  type: integer
+                
+
+
+# End Engineer Reply
+
+# Approve
+
+# End Approve
+
+# Complete
+
+# End Complete

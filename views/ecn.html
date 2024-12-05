@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>TS Molymer: ECN</title>
+    <meta name="description" content="Admin, Dashboard, Bootstrap, Bootstrap 4, Angular, AngularJS" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- for ios 7 style, multi-resolution icon of 152x152 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent" />
+    <link rel="apple-touch-icon" href="/images/Logo-Noname.png" />
+    <meta name="apple-mobile-web-app-title" content="Flatkit" />
+    <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="shortcut icon" sizes="196x196" href="/images/Logo-Noname.png" />
+
+    <!-- style -->
+    <link rel="stylesheet" href="/animate.css/animate.min.css" type="text/css" />
+    <link rel="stylesheet" href="/glyphicons/glyphicons.css" type="text/css" />
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="/material-design-icons/material-design-icons.css" type="text/css" />
+
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+    <!-- build:css /styles/app.min.css -->
+    <link rel="stylesheet" href="/styles/app.css" type="text/css" />
+    <!-- endbuild -->
+    <link rel="stylesheet" href="/styles/font.css" type="text/css" /> 
+    <!-- datatables -->
+    <link rel="stylesheet" href="/styles/datatables.min.css" type="text/css" />
+    <!-- datatables libs print button -->
+    <link rel="stylesheet" href="/jquery/datatables/css/buttons.dataTables.css" />
+    <link rel="stylesheet" href="/jquery/datatables/css/dataTables.dataTables.css" />
+    <!-- select2 -->
+    <link rel="stylesheet" href="/jquery/select2/dist/css/select2.min.css" />
+    <link rel="stylesheet" href="/jquery/select2-bootstrap-theme/dist/select2-bootstrap.min.css" />
+    <link rel="stylesheet" href="/jquery/select2-bootstrap-theme/dist/select2-bootstrap.4.css" />
+
+    <link rel="stylesheet" href="/styles/datatables.style.css" />
+  </head>
+  <body>
+    <div class="app" id="app">
+      <!-- ############ LAYOUT START-->
+      <div class="modal fade" role="dialog" tabindex="-1" id="modalDeleteConfirm">
+        <div class="modal-dialog modal-dialog-centered d-flex justify-content-center"  role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Confirm Delete</h4><button class="close" type="button" aria-label="Close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p>Are you sure to delete?</p>
+                </div>
+                <div class="modal-footer"><button class="btn btn-secondary" type="button" data-dismiss="modal">No</button>
+                    <button class="btn btn-danger" id="btnConfirmDelete" type="button">Yes</button></div>
+            </div>
+        </div>
+    </div>
+      <!-- aside -->
+      <div id="aside" class="app-aside modal fade nav-expand">
+        <div class="left navside black dk" layout="column">
+          <div class="navbar no-radius">
+            <!-- brand -->
+            <a class="navbar-brand" href="/">
+              <!-- <div ui-include="'../images/logo.svg'"></div> -->
+              <img src="/images/Logo-Noname.png" alt="." class="" />
+              <span class="hidden-folded inline" style="font-size: 1.1rem">TS MOLYMER</span>
+            </a>
+            <!-- / brand -->
+          </div>
+          <div class="nav-fold">
+            
+              <span class="clear hidden-folded p-x">
+                <span class="block _500 show-user-name"></span>
+                <small class="block text-muted" id="departmentName"></small>
+                <small class="block text-muted " id="userPosition"></small>
+              </span>
+            
+          </div>
+          <div flex class="hide-scroll">
+            <nav class="scroll nav-stacked nav-active-primary">
+              <ul class="nav" ui-nav>
+                <!-- <li class="nav-header hidden-folded">
+                  <small class="text-muted">Master</small>
+                </li> -->
+
+                <li>
+                  <a href="/">
+                    <!-- <span class="nav-icon">
+                      <i class="material-icons">&#xe3fc; </i>
+                    </span> -->
+                    <span class="nav-label">
+                      <b class="label label-sm danger" id="countPJissue">1</b>
+                    </span>
+                    <span class="nav-text">Project</span>
+                  </a>
+                </li>
+
+                <li class="">
+                  <a href="/ppc">
+                    <!-- <span class="nav-icon">
+                      <i class="material-icons">&#xe8d2; </i>
+                    </span> -->
+                    <span class="nav-label">
+                      <b class="label label-sm danger" id="countPPCissue">1</b>
+                    </span>
+                    <span class="nav-text">PPC</span>
+                  </a>
+                </li>
+                <li class="active">
+                  <a href="/ecn">
+                    <!-- <span class="nav-icon">
+                      <i class="material-icons">&#xe8d2; </i>
+                    </span> -->
+                    <span class="nav-label">
+                      <b class="label label-sm danger" id="countECNissue">1</b>
+                    </span>
+                    <span class="nav-text">ECN</span>
+                  </a>
+                </li>
+                <li class="nav-mst-default">
+                  <a href="/mstDefault">
+                    <!-- <span class="nav-icon">
+                      <i class="material-icons">&#xe8d2; </i>
+                    </span> -->
+                    <!-- <span class="nav-label">
+                      <b class="label label-sm danger" id="countECNissue">1</b>
+                    </span> -->
+                    <span class="nav-text">Master Default</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <nav ui-nav>
+            <ul class="nav">
+              <li><div class="b-b b m-t-sm"></div></li>
+              <li class="no-bg">
+                <a href="/user/logout" class="button">
+                  <span class="nav-icon">
+                    <i class="material-icons">&#xe8ac;</i>
+                  </span>
+                  <span class="nav-text">Logout</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <!-- / aside -->
+
+      <!-- content -->
+      <div id="content" class="app-content box-shadow-z1" role="main">
+        <div class="navbar navbar-toggleable-sm flex-row align-items-center hidden-lg-up">
+          <a data-toggle="collapse" data-target="#navbar-1" class="navbar-item mr-3 hidden-md-up">
+            <i class="material-icons">&#xe5d2;</i>
+          </a>
+          <!-- brand -->
+          <a class="navbar-brand" href="/">
+            <!-- <div ui-include="'../images/logo.svg'"></div> -->
+            <img src="/images/Logo-Noname.png" alt="." class="" />
+            <span class="hidden-folded inline" style="font-size: 1.1rem">TS MOLYMER</span>
+          </a>
+          <!-- / brand -->
+          <!-- navbar collapse -->
+          <div class="collapse navbar-collapse" id="navbar-1">
+            <!-- link and dropdown -->
+            <ul class="nav navbar-nav text-{{app.setting.theme.primary}}-hover">
+              <li class="nav-item">
+                <a class="nav-link" href="/">
+                  <span class="nav-text">Project</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/ppc">
+                  <span class="nav-text">PPC</span>
+                </a>
+              </li>
+
+              <li class="nav-item active">
+                <a class="nav-link" href="/ecn">
+                  <span class="nav-text">ECN</span>
+                </a>
+              </li>
+
+              <li class="nav-item nav-mst-default">
+                <a class="nav-link" href="/mstDefault">
+                  <span class="nav-text">Master Default</span>
+                </a>
+              </li>
+            </ul>
+            <!-- / link and dropdown -->
+          </div>
+          <!-- / navbar collapse -->
+
+          <!-- nabar right -->
+          <ul class="nav navbar-nav flex-row align-items-center ml-auto">
+            <li class="nav-item dropdown">
+              <span class="text-nowrap show-user-name" ></span>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/user/logout">
+                <span class="hidden-xs-down btn btn-sm rounded btn-outline b-danger text-u-c _600"> Logout </span>
+                <span class="hidden-sm-up">
+                  <i class="material-icons">&#xe8ac;</i>
+                </span>
+              </a>
+            </li>
+          </ul>
+          <!-- / navbar right -->
+        </div>
+
+        <div ui-view class="app-body padding" id="view">
+          <div class="row">
+            <div class="col-12">
+              <div class="box">
+                <div class="box-header d-flex align-items-center justify-content-between">
+                  <h2>ECN Issue List</h2>
+                  <div class="form-group row m-0">
+                    <div class="col p-0">
+                      <button type="button" class="btn btn-fw dark" id="btnECNissue">
+                        <i class="fa fa-plus"></i><span class="hidden-xs-down ml-2">Issue</span>
+                      </button>
+                      <button type="button" class="btn btn-fw info d-none dis_edit" id="btnECNedit">
+                        <i class="fa fa-edit"></i><span class="hidden-xs-down ml-2">Edit</span>
+                      </button>
+                      <button type="button" class="btn btn-fw danger d-none" id="btnECNdel">
+                        <i class="fa fa-trash-o"></i><span class="hidden-xs-down ml-2">Delete</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="box-divider m-0"></div>
+                <div class="box-body">
+                  <div class="table-responsive text-nowrap">
+                    <div class="row m-0 mt-3">
+                      <div class="col"></div>
+                      <div class="col">
+                        <div class="form-group row">
+                        <label class="form-control-label col-5 m-0" for="searchMonth">Search Month</label>
+                        <input type="month" class="form-control col-7 month-input" id="searchMonth" placeholder="Select" value="YYYY-MM" autocomplete="off" required>
+                        </div>
+                      </div>
+                      <div class="col"></div>
+                  </div>
+                    <table id="tableReqECN" class="export-table text-center table-bordered b-t b-b table m-0 w-100">
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th style="min-width: 170px">Status</th>
+                          <th>Ref Code.</th>
+                          <th>Customer</th>
+                          <th>Part No</th>
+                          <th>Part Name</th>
+                          <th>Process</th>
+                          <th>Issue By</th>
+                          <th>Issue Date</th>
+                          <th>Complete Date</th>
+                          <th>Remark</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <!-- <tr>
+                          <td>1</td>
+                          <td><span class="label grey-700 w-75">Issued</span></td>
+                          <td>PPC-0001</td>
+                          <td>Customer 1</td>
+                          <td>1</td>
+                          <td>26 May 2024</td>
+                          <td>INJ</td>
+                          <td>PPC-0001</td>
+                          <td>26 May 2024</td>
+                          <td>26 May 2024</td>
+                          <td>Text</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td><span class="label text-white blue-300 w-75">Wait Approve</span></td>
+                          <td>table cell</td>
+                          <td>table cell</td>
+                          <td>table cell</td>
+                          <td>table cell</td>
+                          <td>table cell</td>
+                          <td>table cell</td>
+                          <td>table cell</td>
+                          <td>table cell</td>
+                          <td>table cell</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td><span class="label blue w-75">Approved</span></td>
+                          <td>table cell</td>
+                          <td>table cell</td>
+                          <td>table cell</td>
+                          <td>table cell</td>
+                          <td>table cell</td>
+                          <td>table cell</td>
+                          <td>table cell</td>
+                          <td>table cell</td>
+                          <td>table cell</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td><span class="label danger w-75">Not Approve</span></td>
+                          <td>table cell</td>
+                          <td>table cell</td>
+                          <td>table cell</td>
+                          <td>table cell</td>
+                          <td>table cell</td>
+                          <td>table cell</td>
+                          <td>table cell</td>
+                          <td>table cell</td>
+                          <td>table cell</td>
+                        </tr> -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="accordion" >
+                <!--* status Issue -->
+                <div class="card displayShow" id="headingECNIssue">
+                  <div class="box-header" >
+                    <h2 class="mb-0">
+                      <button
+                        id="btn_headingECNIssue"
+                        class="btn btn-block text-left "
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#collapseECNIssue"
+                        aria-expanded="true"
+                        aria-controls="collapseECNIssue"
+                      >
+                        ECN Issue
+                      </button>
+                    </h2>
+                  </div>
+
+                  <div id="collapseECNIssue" class="collapse" aria-labelledby="headingECNIssue" data-parent="#accordionExample">
+                    <div class="box-body">
+                      <div class="row">
+                        <div class="col-12 m-b-md">
+                          <div class="input-group justify-content-end">
+                            <button class="btn btn-fw success dis_btn" type="button" id="btn_saveECNIssue">
+                              <i class="fa fa-save"></i><span class="ml-2 hidden-xs">Save</span>
+                            </button>
+                          </div>
+                        </div>
+                        <div class="col-12 col-xl-8"></div>
+                        <div class="col-12 col-xl-4">
+                          <div class="form-group row">
+                            <label for="inputRefNo" class="col-sm-3 form-control-label">Ref Code</label>
+                            <div class="col-sm-9">
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="inputRefNo"
+                                value="EC-YYMM000"
+                                placeholder=""
+                                autocomplete="off"
+                                required
+                                disabled
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 col-xl-4">
+                          <div class="form-group row">
+                            <label for="selectCustomer" class="col-sm-3 form-control-label">Customer</label>
+                            <div class="col-sm-9 input-group">
+                              <select id="selectCustomer" class="form-control select2-single clear_select dis_input">
+                                <!-- <option>Customer 1</option>
+                                <option>Customer 2</option>
+                                <option>Customer 3</option> -->
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-xl-4">
+                          <div class="form-group row">
+                            <label for="inputDrawRev" class="col-sm-3 form-control-label">Drawing revise</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control dis_input" id="inputDrawRev" placeholder="" autocomplete="off" required />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-xl-4">
+                          <div class="form-group row">
+                            <label for="selectProcess" class="col-sm-3 form-control-label">Process</label>
+                            <div class="col-sm-9 input-group">
+                              <select id="selectProcess" class="form-control select2-single clear_select dis_input">
+                                <!-- <option>Process 1</option>
+                                <option>Process 2</option>
+                                <option>Process 3</option> -->
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-xl-4">
+                          <div class="form-group row">
+                            <label for="selectModel" class="col-sm-3 form-control-label">Model</label>
+                            <div class="col-sm-9 input-group">
+                              <select id="selectModel" class="form-control select2-single crear dis_input">
+                                <!-- <option>Model 1</option>
+                                <option>Model 2</option>
+                                <option>Model 3</option> -->
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-xl-4">
+                          <div class="form-group row">
+                            <label for="selectPartNo" class="col-sm-3 form-control-label" id="gggg">Part No</label>
+                            <div class="col-sm-9 input-group">
+                              <select id="selectPartNo" class="form-control select2-single crear dis_input">
+                                <!-- <option>Part No 1</option>
+                                <option>Part No 2</option>
+                                <option>Part No 3</option> -->
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-12 col-xl-4">
+                          <div class="form-group row">
+                            <label for="inputPartName_Request" class="col-sm-3 form-control-label" >Part Name</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control " id="inputPartName_Request" placeholder="" autocomplete="off" required  disabled/>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-xl-4">
+                          <div class="form-group row">
+                            <label for="inputReqDate" class="col-sm-3 form-control-label">Received Date</label>
+                            <div class="col-sm-9">
+                              <div class="form-group m-0">
+                                <input type="date" class="form-control dis_input" id="inputReqDate" placeholder="" autocomplete="off" required />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-xl-4">
+                          <div class="form-group row">
+                            <label for="inputECNDate" class="col-sm-3 form-control-label">ECN Issue Date</label>
+                            <div class="col-sm-9">
+                              <input type="date" class="form-control dis_input" id="inputECNDate" placeholder="" autocomplete="off" required />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-xl-4">
+                          <div class="form-group row">
+                            <label for="inputECNNo" class="col-sm-3 form-control-label">Drawing No.</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control dis_input" id="inputECNNo" placeholder="" autocomplete="off" required />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-xl-4">
+                          <div class="form-group row">
+                            <label for="customerECN" class="col-sm-3 form-control-label">Customer ECN #</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control dis_input" id="customerECN" placeholder="" autocomplete="off" required />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row m-y-md">
+                        <div class="col-12 col-xl-6">
+                          <h5 class="m-b-md">Document Change</h5>
+                          <div class="form-group row">
+                            <label for="selectVerifyData" class="col-sm-2 form-control-label">Select Document</label>
+                            <div class="col-sm-10 input-group select2-bootstrap-append">
+                              <select id="selectVerifyData" class="form-control select2-multiple dis_input" multiple="multiple">
+                                <!-- <option value="1">1.Drawing</option>
+                                <option value="2">2.Working Std.</option>
+                                <option value="3">3.Job Ticket</option>
+                                <option value="4">4.Part Control List</option>
+                                <option value="5">5.FMEA</option>
+                                <option value="6">6.Control Plan</option>
+                                <option value="7">7.Inspection Standard</option>
+                                <option value="8">8.Packing Std.</option> -->
+                              </select>
+                            </div>
+                          </div>
+                          <div class="table-responsive text-nowrap m-t-sm">
+                            <table id="tableAnsInsPlan" class="text-center table-bordered b-t b-b table m-0 w-100 dis_input" >
+                              <thead>
+                                <tr>
+                                  <th>No</th>
+
+                                  <th>Document</th>
+                                  <th>Date</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <!-- <tr>
+                                  <td>1</td>
+                                  <td>Drawing</td>
+                                  <td><input type="date" class="form-control" /></td>
+                                </tr>
+                                <tr>
+                                  <td>2</td>
+                                  <td>Working Std.</td>
+                                  <td><input type="date" class="form-control" /></td>
+                                </tr>
+                                <tr>
+                                  <td>3</td>
+                                  <td>Job Ticket</td>
+                                  <td><input type="date" class="form-control" /></td>
+                                </tr> -->
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        <div class="col-12 col-xl-6">
+                          <h5 class="m-b-md">Engineering Process</h5>
+                          <!-- <div class="form-group row">
+                            <label for="selectVerifyData" class="col-sm-2 form-control-label">New Process</label>
+                            <div class="col-sm-10 input-group select2-bootstrap-append">
+                              <input id="inputenProcess" type="text" class="form-control" autocomplete="off" />
+                              <div class="input-group-btn">
+                                <button class="btn success" type="button">
+                                  <i class="fa fa-plus"></i>
+                                  <span class="ml-2 hidden-xs">Add Process</span>
+                                </button>
+                              </div>
+                            </div>
+                          </div> -->
+                          <div class="table-responsive text-nowrap m-t-sm">
+                            <table id="tbEngProcess" class="text-center table-bordered b-t b-b table m-0 w-100 dis_input">
+                              <thead>
+                                <tr>
+                                  <th>No</th>
+                                  <th>Process</th>
+                                  <th>Date</th>
+                                  <th>Status</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>1</td>
+                                  <td>Kick-off Date</td>
+                                  <td><input type="date" class="form-control" /></td>
+                                  <td>
+                                    <select class="form-control">
+                                      <option value="0">On Process</option>
+                                      <option value="1">Done</option>
+                                    </select>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>2</td>
+                                  <td>Modify Finish Date</td>
+                                  <td><input type="date" class="form-control" /></td>
+                                  <td>
+                                    <select class="form-control">
+                                      <option value="0">On Process</option>
+                                      <option value="1">Done</option>
+                                    </select>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>3</td>
+                                  <td>Trial and Measurement</td>
+                                  <td><input type="date" class="form-control" /></td>
+                                  <td>
+                                    <select class="form-control">
+                                      <option value="0">On Process</option>
+                                      <option value="1">Done</option>
+                                    </select>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row m-y-md">
+                        <div class="col-12 col-xl-4">
+                          <h5 class="m-b-md">New Process Change</h5>
+                          <div class="form-group row">
+                            <label for="inputInjDate" class="col-sm-3 form-control-label">Injection Date</label>
+                            <div class="col-sm-9">
+                              <input type="date" class="form-control dis_input" id="inputInjDate" placeholder="" autocomplete="off" required />
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="inputSerialNum" class="col-sm-3 form-control-label">Serial Number</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control dis_input" id="inputSerialNum" placeholder="" autocomplete="off" required />
+                            </div>
+                          </div>
+                          <div class="table-responsive text-nowrap m-t-sm m-b-md">
+                            <table class="text-center table-bordered b-t b-b table m-0 w-100">
+                              <thead>
+                                <tr>
+                                  <th colspan="2" class="text-center">Delivery (first lot Modification tool)</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>PO</td>
+                                  <td><input id="inputPO" type="text" class="form-control dis_input" /></td>
+                                </tr>
+                                <tr>
+                                  <td>QTY</td>
+                                  <td><input id="inputQTY" type="text" class="form-control dis_input" /></td>
+                                </tr>
+                                <tr>
+                                  <td>Date</td>
+                                  <td><input id="inputDate" type="date" class="form-control dis_input" /></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+
+                          <div class="form-group row">
+                            <div class="col-12">
+                              <h5 class="m-b-md">Check Point</h5>
+                              <div class="form-group row">
+                                <label for="selectSection" class="col-sm-2 form-control-label">Section</label>
+                                <div class="col-sm-10 input-group select2-bootstrap-append">
+                                  <select id="selectSection" class="form-control select2-multiple dis_input" multiple="multiple">
+                                    <!-- <option value="1">1.CS</option>
+                                    <option value="2">2.PU</option>
+                                    <option value="3">3.ST</option>
+                                    <option value="4">4.QC</option>
+                                    <option value="5">5.IN</option>
+                                    <option value="6">6.DC</option>
+                                    <option value="7">7.LG</option>
+                                    <option value="8">8.W/H</option>
+                                    <option value="9">9.DL</option> -->
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="table-responsive text-nowrap m-t-sm">
+                                <table id="tbCheckPoint" class="text-center table-bordered b-t b-b table m-0 w-100">
+                                  <thead>
+                                    <tr>
+                                      <th>Section</th>
+                                      <th>Checking Description</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td>CS</td>
+                                      <td><input type="text" class="form-control" /></td>
+                                    </tr>
+                                    <tr>
+                                      <td>IN</td>
+                                      <td><input type="text" class="form-control" /></td>
+                                    </tr>
+                                    <tr>
+                                      <td>LG</td>
+                                      <td><input type="text" class="form-control" /></td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-xl-8">
+                          <div class="form-group row">
+                            <label class="col-sm-3 form-control-label">Upload Image</label>
+                            <div class="col-sm-9 m-b-sm">
+                              <div class="form-file">
+                                <input type="file" id="inputFile" class="dis_input" accept="image/*"/>
+                                <button class="btn white w-100 dis_input" id="btnFile">SELECT IMAGE</button>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-12">
+                              <img id="show_image" class="w-100" src="/images/p0.jpg" alt="" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row m-y-md">
+                        <div class="col-12 col-xl-6">
+                          <div class="form-group row">
+                            <label for="inputComment" class="col-sm-3 form-control-label">Remark</label>
+                            <div class="col-sm-9">
+                              <textarea class="form-control dis_input" id="inputRemark" rows="2"></textarea>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-xl-6">
+                          <div class="form-group row">
+                            <label for="selectReqEmailIssue" class="col-sm-3 form-control-label">Email</label>
+                            <div class="col-sm-9 input-group select2-bootstrap-append">
+                              <select id="selectReqEmailIssue" class="form-control select2-multiple dis_selectMail" multiple="multiple">
+                                <option>Email 1</option>
+                                <option>Email 2</option>
+                                <option>Email 3</option>
+                              </select>
+                              <span class="input-group-btn">
+                                <button id="btnReqEmailIssue" class="btn btn-default black sendMail dis_sendmail" type="button" data-select2-open="multi-append" checkRoute="/issue/sendemail">
+                                  <span class="fa fa-send"></span>
+                                </button>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!--* status Approval -->
+                <div class="card displayShow" id="headingECNApprov">
+                  <div class="box-header" >
+                    <h2 class="mb-0">
+                      <button
+                        id="btn_headingECNApprove"
+                        class="btn btn-block text-left"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#collapseECNApprov"
+                        aria-expanded="false"
+                        aria-controls="collapseECNApprov"
+                      >
+                        Approval
+                      </button>
+                    </h2>
+                  </div>
+
+
+
+                  <div id="collapseECNApprov" class="collapse" aria-labelledby="headingECNApprov" data-parent="#accordionExample">
+                    <div class="box-body">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="input-group justify-content-end">
+                            <button class="btn btn-fw success dis_btn" type="button" id="btn_saveECNApprove">
+                              <i class="fa fa-save"></i><span class="ml-2 hidden-xs">Save</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row m-b-md">
+                        <div class="col-12">
+                            <div class="row">
+                              <div class="col-12 col-xl-3 mb-0">
+                                <h5 class="m-y-md">Plan Judgement</h5>
+                              </div>
+                              <div class="col-12 col-xl-9 input-group align-items-center mb-0">
+                                <div class="radio w-25">
+                                    <label class="md-check m-0">
+                                      <input type="radio" name="PlanJudgement" class="dis_input" value="1" />
+                                      <i class="green"></i>
+                                    Approve
+                                  </label>
+                                </div>
+                                <div class="radio w-25">
+                                  <label class="md-check m-0">
+                                    <input type="radio" name="PlanJudgement" class="dis_input" value="2" />
+                                    <i class="green"></i>
+                                    Not Approve
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="row m-b-md">
+                        <div class="col-12 col-xl-6">
+                          <h5 class="m-b-md">Approval</h5>
+                          <div class="table-responsive text-nowrap m-t-sm m-b-md">
+                            <table class="text-center table-bordered b-t b-b table m-0 w-100">
+                              <thead>
+                                <tr>
+                                  <th colspan="2" class="text-center">TS Approved</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>Issue</td>
+                                  <td>
+                                    <div class="form-group row">
+                                      <div class="col-sm-12 input-group">
+                                        <input
+                                          type="text"
+                                          class="form-control text-center"
+                                          id="showECNIssue"
+                                          placeholder=""
+                                          autocomplete="off"
+                                          readonly
+                                        />
+                                        <div class="input-group-btn">
+                                          <button class="btn btn-default black btn-swal-sign dis_sign" type="button" swal-title="ISSUED BY"
+                                          swal-target="showECNIssue" id="btnSignIssue" checkSign="/approval/sign/issue">sign</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Checked</td>
+                                  <td>
+                                    <div class="form-group row">
+                                      <div class="col-sm-12 input-group">
+                                        <input
+                                          type="text"
+                                          class="form-control text-center"
+                                          id="showEnPeChecked"
+                                          placeholder=""
+                                          autocomplete="off"
+                                          readonly
+                                        />
+                                        <div class="input-group-btn">
+                                          <button class="btn btn-default black btn-swal-sign dis_sign" type="button" swal-title="CHECKED BY"
+                                          swal-target="showEnPeChecked" id="btnSignChecked" checkSign="/approval/sign/check">sign</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Approved</td>
+                                  <td>
+                                    <div class="form-group row">
+                                      <div class="col-sm-12 input-group">
+                                        <input
+                                          type="text"
+                                          class="form-control text-center"
+                                          id="showEnPeApproved"
+                                          placeholder=""
+                                          autocomplete="off"
+                                          readonly
+                                        />
+                                        <div class="input-group-btn">
+                                          <button class="btn btn-default black btn-swal-sign dis_sign" type="button" swal-title="APPROVED BY"
+                                          swal-target="showEnPeApproved" id="btnSignApprove" checkSign="/approval/sign/approve">sign</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+ 
+                        </div>
+                        <div class="col-12 col-xl-6">
+                          <h5 class="m-b-md">Signature ECN</h5>
+                          <div class="form-group row">
+                            <label for="selectConcernDept" class="col-sm-3 form-control-label">Dept ECN</label>
+                            <div class="col-sm-9 input-group select2-bootstrap-append">
+                              <select id="selectConcernDept" class="form-control select2-multiple dis_input" multiple="multiple">
+                              </select>
+                            </div>
+                          </div>
+                          <div class="table-responsive text-nowrap m-t-sm">
+                            <table id="tbConcern_approve" class="text-center table-bordered b-t b-b table m-0 w-100">
+                              <thead>
+                                <tr>
+                                  <th colspan="2">Signature</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                
+                              </tbody>
+                            </table>
+                          </div>
+
+                          <div class="m-y-md">
+                            <div class="input-group align-items-center m-b-sm">
+                              <div class="radio w-100">
+                                <label class="md-check m-0">
+                                  <input type="radio" name="radioApproval" value="2" class="dis_input" />
+                                  <i class="green"></i>
+                                  Supplier Approved
+                                </label>
+                              </div>
+                            </div>
+                            <div class="input-group align-items-center m-b-sm">
+                              <div class="radio w-100">
+                                <label class="md-check m-0">
+                                  <input type="radio" name="radioApproval" value="1" class="dis_input" />
+                                  <i class="green"></i>
+                                  Customer Approved
+                                </label>
+                                <div class="form-group row w-100 m-t-sm">
+                                  <div class="col-12 m-b-sm">
+                                    <div class="form-file">
+                                      <input type="file" id="inputFilePDF" accept=".pdf" class="dis_input"/>
+                                      <button class="btn white w-100 dis_input" id="btnFilePDF">SELECT FILE</button>
+                                    </div>
+                                  </div>
+                                  <div class="col-12">
+                                    <button class="btn btn-default w-100 dark" id="btnViewPDF" type="button">
+                                      <i class="fa fa-eye"></i><span class="ml-2">View</span>
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                            <label for="selectReqEmailApproval" class="col-sm-3 form-control-label">Email</label>
+                            <div class="col-sm-9 input-group select2-bootstrap-append">
+                              <select id="selectReqEmailApproval" class="form-control select2-multiple dis_selectMail" multiple="multiple">
+                                <option>Email 1</option>
+                                <option>Email 2</option>
+                                <option>Email 3</option>
+                              </select>
+                              <span class="input-group-btn">
+                                <button id="btnReqEmailApproval" class="btn btn-default black sendMail dis_sendmail" type="button" data-select2-open="multi-append" checkRoute="/approval/sendemail">
+                                  <span class="fa fa-send"></span>
+                                </button>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / content -->
+    </div>
+  </body>
+  <!-- build:js scripts/app.html.js -->
+  <!-- jQuery -->
+  <script src="/jquery/jquery/dist/jquery.js"></script>
+  <!-- Bootstrap -->
+  <script src="/jquery/tether/dist/js/tether.min.js"></script>
+  <script src="/jquery/bootstrap/dist/js/bootstrap.js"></script>
+  <!-- core -->
+  <script src="/jquery/underscore/underscore-min.js"></script>
+  <script src="/jquery/jQuery-Storage-API/jquery.storageapi.min.js"></script>
+  <script src="/jquery/PACE/pace.min.js"></script>
+
+  <!-- datatables -->
+  <script src="/jquery/datatables/media/js/jquery.dataTables.min.js"></script>
+  <!-- <script src="/js/testdatatable.js"></script> -->
+
+  <!-- datatables libs print button -->
+  <script src="/jquery/datatables/js/dataTables.js"></script>
+  <script src="/jquery/datatables/js/dataTables.buttons.js"></script>
+  <script src="/jquery/datatables/js/buttons.dataTables.js"></script>
+  <script src="/jquery/datatables/js/jszip.min.js"></script>
+  <script src="/jquery/datatables/js/pdfmake.min.js"></script>
+  <script src="/jquery/datatables/js/vfs_fonts.js"></script>
+  <script src="/jquery/datatables/js/buttons.html5.min.js"></script>
+  <script src="/jquery/datatables/js/buttons.print.min.js"></script>
+
+  <!-- select2 -->
+  <script src="/jquery/select2/dist/js/select2.min.js"></script>
+  <script src="/js/testSelect2.js"></script>
+
+  <!-- sweetalert2 -->
+  <script src="/jquery/swalalert2/swalalert2.js"></script>
+  <script src="/js/testSwalalert2.js"></script>
+  <!-- <script src="/js/testSwalalert2.js"></script> -->
+
+  <!-- scripts -->
+  <script src="/scripts_page/function.js"></script>
+  <script src="/scripts_page/Ecn/ecnProject.js"></script>
+  <!-- endbuild -->
+</html>

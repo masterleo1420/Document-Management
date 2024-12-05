@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>TS Molymer: Revise History</title>
+    <meta name="description" content="Admin, Dashboard, Bootstrap, Bootstrap 4, Angular, AngularJS" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- for ios 7 style, multi-resolution icon of 152x152 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent" />
+    <link rel="apple-touch-icon" href="/images/Logo-Noname.png" />
+    <meta name="apple-mobile-web-app-title" content="Flatkit" />
+    <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="shortcut icon" sizes="196x196" href="/images/Logo-Noname.png" />
+
+    <!-- style -->
+    <link rel="stylesheet" href="/animate.css/animate.min.css" type="text/css" />
+    <link rel="stylesheet" href="/glyphicons/glyphicons.css" type="text/css" />
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="/material-design-icons/material-design-icons.css" type="text/css" />
+
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+    <!-- build:css /styles/app.min.css -->
+    <link rel="stylesheet" href="/styles/app.css" type="text/css" />
+    <!-- endbuild -->
+    <link rel="stylesheet" href="/styles/font.css" type="text/css" />
+    <!-- datatables -->
+    <link rel="stylesheet" href="/styles/datatables.min.css" type="text/css" />
+    <!-- datatables libs print button -->
+    <link rel="stylesheet" href="/jquery/datatables/css/buttons.dataTables.css" />
+    <link rel="stylesheet" href="/jquery/datatables/css/dataTables.dataTables.css" />
+    <!-- select2 -->
+    <link rel="stylesheet" href="/jquery/select2/dist/css/select2.min.css" />
+    <link rel="stylesheet" href="/jquery/select2-bootstrap-theme/dist/select2-bootstrap.min.css" />
+    <link rel="stylesheet" href="/jquery/select2-bootstrap-theme/dist/select2-bootstrap.4.css" />
+
+    <link rel="stylesheet" href="/styles/datatables.style.css" />
+  </head>
+  <body>
+    <div class="app" id="app">
+      <!-- ############ LAYOUT START-->
+
+      <!-- aside -->
+      <div id="aside" class="app-aside modal fade nav-expand">
+        <div class="left navside black dk" layout="column">
+          <div class="navbar no-radius">
+            <!-- brand -->
+            <a class="navbar-brand" href="/">
+              <!-- <div ui-include="'../images/logo.svg'"></div> -->
+              <img src="/images/Logo-Noname.png" alt="." class="" />
+              <span class="hidden-folded inline" style="font-size: 1.1rem">TS MOLYMER</span>
+            </a>
+            <!-- / brand -->
+          </div>
+          <div class="nav-fold">
+           
+              <span class="clear hidden-folded p-x">
+                <span class="block _500 show-user-name" id="userName"></span>
+                <small class="block text-muted" id="departmentName"></small>
+                <small class="block text-muted" id="userPosition"></small>
+              </span>
+            
+          </div>
+          <div flex class="hide-scroll">
+            <nav class="scroll nav-stacked nav-active-primary">
+              <ul class="nav" ui-nav>
+                <!-- <li class="nav-header hidden-folded">
+                  <small class="text-muted">Master</small>
+                </li> -->
+
+                <li class="active">
+                  <a href="/">
+                    <!-- <span class="nav-icon">
+                      <i class="material-icons">&#xe3fc; </i>
+                    </span> -->
+                    <span class="nav-label">
+                      <b class="label label-sm danger" id="countPJissue"></b>
+                    </span>
+                    <span class="nav-text">Project</span>
+                  </a>
+                </li>
+                <li class="">
+                  <a href="/ppc">
+                    <!-- <span class="nav-icon">
+                      <i class="material-icons">&#xe8d2; </i>
+                    </span> -->
+                    <span class="nav-label">
+                      <b class="label label-sm danger" id="countPPCissue"></b>
+                    </span>
+                    <span class="nav-text">PPC</span>
+                  </a>
+                </li>
+                <li class="">
+                  <a href="/ecn">
+                    <!-- <span class="nav-icon">
+                      <i class="material-icons">&#xe8d2; </i>
+                    </span> -->
+                    <span class="nav-label">
+                      <b class="label label-sm danger" id="countECNissue"></b>
+                    </span>
+                    <span class="nav-text">ECN</span>
+                  </a>
+                </li>
+                <li class="nav-mst-default">
+                  <a href="/mstDefault">
+                    <!-- <span class="nav-icon">
+                      <i class="material-icons">&#xe8d2; </i>
+                    </span> -->
+                    <!-- <span class="nav-label">
+                      <b class="label label-sm danger" id="countECNissue">1</b>
+                    </span> -->
+                    <span class="nav-text">Master Default</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <nav ui-nav>
+            <ul class="nav">
+              <li><div class="b-b b m-t-sm"></div></li>
+              <li class="no-bg">
+                <a href="/user/logout" class = "button">
+                  <span class="nav-icon">
+                    <i class="material-icons">&#xe8ac;</i>
+                  </span>
+                  <span class="nav-text">Logout</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <!-- / aside -->
+
+      <!-- content -->
+      <div id="content" class="app-content box-shadow-z1" role="main">
+        <div class="navbar navbar-toggleable-sm flex-row align-items-center hidden-lg-up">
+          <a data-toggle="collapse" data-target="#navbar-1" class="navbar-item mr-3 hidden-md-up">
+            <i class="material-icons">&#xe5d2;</i>
+          </a>
+          <!-- brand -->
+          <a class="navbar-brand" href="/">
+            <!-- <div ui-include="'../images/logo.svg'"></div> -->
+            <img src="/images/Logo-Noname.png" alt="." class="" />
+            <span class="hidden-folded inline" style="font-size: 1.1rem">TS MOLYMER</span>
+          </a>
+          <!-- / brand -->
+          <!-- navbar collapse -->
+          <div class="collapse navbar-collapse" id="navbar-1">
+            <!-- link and dropdown -->
+            <ul class="nav navbar-nav text-{{app.setting.theme.primary}}-hover">
+              <li class="nav-item">
+                <a class="nav-link" href="/">
+                  <span class="nav-text">Project</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/ppc">
+                  <span class="nav-text">PPC</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/ecn">
+                  <span class="nav-text">ECN</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/mstDefault">
+                  <span class="nav-text">Master Default</span>
+                </a>
+              </li>
+            </ul>
+            <!-- / link and dropdown -->
+          </div>
+          <!-- / navbar collapse -->
+
+          <!-- nabar right -->
+          <ul class="nav navbar-nav flex-row align-items-center ml-auto">
+            <li class="nav-item dropdown">
+              <span class="text-nowrap show-user-name"></span>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/user/logout">
+                <span class="hidden-xs-down btn btn-sm rounded btn-outline b-danger text-u-c _600"> Logout </span>
+                <span class="hidden-sm-up">
+                  <i class="material-icons">&#xe8ac;</i>
+                </span>
+              </a>
+            </li>
+          </ul>
+          <!-- / navbar right -->
+        </div>
+
+        <!-- modal -->
+
+        <div id="modalPrintHistory" class="modal" data-backdrop="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Print History</h5>
+                <button type="button" class="btn btn-sm danger" data-dismiss="modal" aria-label="Close">
+                  <i class="fa fa-times"></i>
+                </button>
+              </div>
+              <div class="modal-body text-center p-lg">
+                <div class="table-responsive text-nowrap w-100">
+                  <table id="tableHisPrint" class="export-table text-dark text-center table-bordered b-t b-b table m-0 w-100">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>
+                          Print<br class="hidden-lg-up" />
+                          By
+                        </th>
+                        <th>
+                          Print<br class="hidden-lg-up" />
+                          Date
+                        </th>
+                        <th>Department</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>Name</td>
+                        <td>26 May 2024 10:12:10</td>
+                        <td>QC</td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                      </tr>
+                      <tr>
+                        <td>3</td>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                      </tr>
+                      <tr>
+                        <td>4</td>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                        <td>Table cell</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- / modal -->
+
+        <div ui-view class="app-body padding" id="view">
+          <div class="row">
+            <div class="col-12">
+              <div class="box">
+                <div class="box-header d-flex align-items-center justify-content-between">
+                  <h2 class="">Revise History</h2>
+                  <div class="form-group row m-0">
+                    <div class="col p-0">
+                      <button type="button" class="btn btn-fw dark d-none" id="btnHisReviseDoc">
+                        <i class="fa fa-file-pdf-o"></i><span class="hidden-xs-down ml-2">View Doc.</span>
+                      </button>
+                      <button class="btn btn-fw info d-none" type="button" id="btnHisPrint">
+                        <i class="fa fa-history"></i><span class="hidden-xs-down ml-2">Print History</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="box-divider m-0"></div>
+                <div class="box-body">
+                  <div class="form-inline">
+                    <div class="form-group">
+                      <div class="input-group mb-1">
+                        <div class="input-group-addon border-0">Customer</div>
+                        <input type="text" class="form-control" id="inputCustomer" disabled />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="input-group mb-1">
+                        <div class="input-group-addon border-0">Model</div>
+                        <input type="text" class="form-control" id="inputModel" disabled />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="input-group mb-1">
+                        <div class="input-group-addon border-0">Ref Code</div>
+                        <input type="text" class="form-control" id="inputRefCode" disabled />
+                      </div>
+                    </div>
+                    <!-- <div class="form-group">
+                      <div class="input-group mb-1">
+                        <div class="input-group-addon border-0">Part Name</div>
+                        <input type="text" class="form-control" id="inputPartname" disabled />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="input-group mb-1">
+                        <div class="input-group-addon border-0">Part Code</div>
+                        <input type="text" class="form-control" id="inputPartcode" disabled />
+                      </div>
+                    </div> -->
+                  </div>
+                  <div class="table-responsive text-nowrap">
+                    <table id="tableHisRevise" class="export-table text-center table-bordered b-t b-b table m-0 w-100">
+                      <thead>
+                        <tr>
+                          <th>Revise No.</th>
+                          <th>Part Code</th>
+                          <th>Part Name</th>
+                          <th>
+                            Drawing <br class="hidden-lg-up" />
+                            Rev
+                          </th>
+                          <th>
+                            Revised<br class="hidden-lg-up" />
+                            Date
+                          </th>
+                          <th>
+                            Doc<br class="hidden-lg-up" />
+                            Name
+                          </th>
+                          <th>
+                            Doc<br class="hidden-lg-up" />
+                            File
+                          </th>
+                          <th>
+                            Issued<br class="hidden-lg-up" />
+                            Date
+                          </th>
+                          <th>
+                            Checked<br class="hidden-lg-up" />
+                            Date
+                          </th>
+                          <th>
+                            Approved<br class="hidden-lg-up" />
+                            Date
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <!-- <tr>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>Door Sub Assy</td>
+                          <td>26 May 2024</td>
+                          <td>3D Dwg</td>
+                          <td>240123se.pdf</td>
+                          <td>26 May 2024</td>
+                          <td>26 May 2024</td>
+                          <td>26 May 2024</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                          <td>Table cell</td>
+                        </tr> -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="col-12 d-none" id="PrintHistory">
+              <div class="box">
+                <div class="box-header d-flex align-items-center justify-content-between">
+                  <h2 class="">Print History</h2>
+                  <div class="form-group row m-0">
+                    <div class="col p-0">
+                      <!-- <button type="button" class="btn btn-fw dark d-none" id="btnHisReviseDoc">
+                        <i class="fa fa-file-pdf-o"></i><span class="hidden-xs-down ml-2">View Doc.</span>
+                      </button>
+                      <button class="btn btn-fw info d-none" type="button" id="btnHisPrint">
+                        <i class="fa fa-history"></i><span class="hidden-xs-down ml-2">Print History</span>
+                      </button> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="box-divider m-0"></div>
+              </div>
+            </div>
+            <div class="col-12 pt-2 d-none" id="pdfContainer">
+              <div class="btn-groups w-100 mb-2">
+                <button type="button" class="btn btn-fw blue" id="btnPrintDoc">
+                  <i class="fa fa-print"></i><span class="hidden-xs-down ml-2">Print</span>
+                </button>
+                <!-- <button id="printButton">Print test</button> -->
+              </div>
+              <div id="pdfViewer" class="w-100">
+                <!-- <img src="/images/logo.png" alt="" style="position: absolute; top: 0; left: 0" /> -->
+                <iframe id="showPDF" src="/pdf/Test PDF Veiw.pdf#toolbar=0" type="application/pdf" height="100%" width="100%"></iframe>
+                <div id="pdfStamp">
+                  <table class="text-center m-0 w-100">
+                    <thead>
+                      <tr>
+                        <th>Part Code</th>
+                        <th>Revise No.</th>
+                        <th>Revise Date</th>
+                        <th>Print Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Code</td>
+                        <td>02</td>
+                        <td>26 Jan 2024</td>
+                        <td>26 May 2024</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table class="text-start m-0 w-100">
+                    <thead>
+                      <tr>
+                        <th>Issued By</th>
+                        <th>Checked By</th>
+                        <th>Approved By</th>
+                        <th>Print By</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Name</td>
+                        <td>Name</td>
+                        <td>Name</td>
+                        <td>Name</td>
+                      </tr>
+                      <tr>
+                        <td>26 Jan 2024</td>
+                        <td>26 Jan 2024</td>
+                        <td>26 Jan 2024</td>
+                        <td>26 May 2024</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / content -->
+    </div>
+  </body>
+  <!-- build:js scripts/app.html.js -->
+  <!-- jQuery -->
+  <script src="/jquery/jquery/dist/jquery.js"></script>
+  <!-- Bootstrap -->
+  <script src="/jquery/tether/dist/js/tether.min.js"></script>
+  <script src="/jquery/bootstrap/dist/js/bootstrap.js"></script>
+  <!-- print -->
+  <script src="/pdf-lib/download.js"></script>
+  <script src="/pdf-lib/pdf-lib.min.js"></script>
+  <script src="/jquery/html2pdf/html2pdf.bundle.min.js"></script>
+  <script src="/js/print.js"></script>
+  <!-- core -->
+  <script src="/jquery/underscore/underscore-min.js"></script>
+  <script src="/jquery/jQuery-Storage-API/jquery.storageapi.min.js"></script>
+  <script src="/jquery/PACE/pace.min.js"></script>
+  
+  <!-- pdf -->
+  
+  <!-- datatables -->
+  <script src="/jquery/datatables/media/js/jquery.dataTables.min.js"></script>
+  <!-- <script src="/js/testdatatable.js"></script> -->
+
+  <!-- datatables libs print button -->
+  <script src="/jquery/datatables/js/dataTables.js"></script>
+  <script src="/jquery/datatables/js/dataTables.buttons.js"></script>
+  <script src="/jquery/datatables/js/buttons.dataTables.js"></script>
+  <script src="/jquery/datatables/js/jszip.min.js"></script>
+  <script src="/jquery/datatables/js/pdfmake.min.js"></script>
+  <script src="/jquery/datatables/js/vfs_fonts.js"></script>
+  <script src="/jquery/datatables/js/buttons.html5.min.js"></script>
+  <script src="/jquery/datatables/js/buttons.print.min.js"></script>
+
+  <!-- select2 -->
+  <script src="/jquery/select2/dist/js/select2.min.js"></script>
+  <!-- <script src="/js/testSelect2.js"></script> -->
+
+  <!-- sweetalert2 -->
+  <script src="/jquery/swalalert2/swalalert2.js"></script>
+
+  <!-- <script src="/js/testSwalalert2.js"></script> -->
+  
+  <!-- scripts -->
+  <script src="/scripts_page/function.js"></script>
+  <script src="/scripts_page/Project/reviseHistory.js"></script>
+
+</html>
